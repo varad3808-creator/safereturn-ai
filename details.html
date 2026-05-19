@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Emergency Details - SafeReturn</title>
+
+<link
+rel="stylesheet"
+href="./style.css">
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+
+</script>
+
+</head>
+
+<body>
+
+<!-- LOADING SCREEN -->
+
+<div class="loading-screen" id="loader">
+
+<div class="loading-spinner"></div>
+
+<div class="loading-text">
+
+Loading SafeReturn...
+
+</div>
+
+</div>
+
+<!-- GLOWS -->
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+
+Safe<span>Return</span>
+
+</div>
+
+<div class="nav-links">
+
+<a
+href="./index.html"
+class="btn btn-glass">
+
+Home
+
+</a>
+
+<a
+href="./map.html"
+class="btn btn-primary">
+
+Emergency Map
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- DETAILS SECTION -->
+
+<section class="section">
+
+<div
+id="detailsContainer">
+
+<div class="glass-card">
+
+<h2>
+
+Loading Emergency Report...
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+
+<script type="module">
+
+import {
+
+db
+
+}
+
+from "./firebase.js";
+
+import {
+
+doc,
+getDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+// =========================================
+// GET ID
+// =========================================
+
+const params =
+new URLSearchParams(
+
+window.location.search
+
+);
+
+const id =
+params.get("id");
+
+// =========================================
+// ELEMENT
+// =========================================
+
+const detailsContainer =
+document.getElementById("detailsContainer");
+
+// =========================================
+// LOAD DETAILS
+// =========================================
+
+async function loadDetails(){
+
+try{
+
+const docRef =
+doc(db,"reports",id);
+
+const docSnap =
+await getDoc(docRef);
+
+if(docSnap.exists()){
+
+const data =
+docSnap.data();
+
+detailsContainer.innerHTML =
+
+`
+
+<div class="glass-card fade-up">
+
+<img
+src="${data.image}"
+style="
+width:100%;
+max-height:550px;
+object-fit:cover;
+border-radius:30px;
+margin-bottom:30px;
+">
+
+<h1
+style="
+font-size:52px;
+margin-bottom:20px;
+">
+
+${data.name}
+
+</h1>
+
+<div
+style="
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-bottom:35px;
+">
+
+<div class="glass-card">
+
+<h3>
+
+Type
+
+</h3>
+
+<p>
+
+${data.type}
+
+</p>
+
+</div>
+
+<div class="glass-card">
+
+<h3>
+
+Age
+
+</h3>
+
+<p>
+
+${data.age}
+
+</p>
+
+</div>
+
+<div class="glass-card">
+
+<h3>
+
+Location
+
+</h3>
+
+<p>
+
+${data.location}
+
+</p>
+
+</div>
+
+</div>
+
+<div class="glass-card">
+
+<h2
+style="
+margin-bottom:20px;
+">
+
+Full Description
+
+</h2>
+
+<p
+style="
+line-height:2;
+font-size:18px;
+color:#d1d5db;
+">
+
+${data.description}
+
+</p>
+
+</div>
+
+<br>
+
+<div
+style="
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+">
+
+<a
+href="./poster.html?id=${id}"
+class="btn btn-warning">
+
+Generate Poster
+
+</a>
+
+<a
+href="./map.html"
+class="btn btn-primary">
+
+Open Emergency Map
+
+</a>
+
+<button
+class="btn btn-success"
+onclick="shareReport()">
+
+Share Report
+
+</button>
+
+</div>
+
+<br><br>
+
+<div class="glass-card fade-up">
+
+<h2
+style="
+margin-bottom:25px;
+text-align:center;
+">
+
+Emergency QR Rescue Card
+
+</h2>
+
+<div
+id="qrcode"
+style="
+display:flex;
+justify-content:center;
+padding:20px;
+">
+
+</div>
+
+<p
+style="
+text-align:center;
+margin-top:20px;
+line-height:1.8;
+color:#d1d5db;
+">
+
+Scan this QR code to instantly open this emergency report.
+
+</p>
+
+</div>
+
+</div>
+
+`;
+
+// =========================================
+// QR CODE
+// =========================================
+
+new QRCode(
+
+document.getElementById("qrcode"),
+
+{
+
+text:window.location.href,
+
+width:220,
+
+height:220
+
+}
+
+);
+
+}
+else{
+
+detailsContainer.innerHTML =
+
+`
+
+<div class="glass-card">
+
+<h2>
+
+Report Not Found
+
+</h2>
+
+<p>
+
+This emergency report does not exist.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+catch(error){
+
+console.log(error);
+
+detailsContainer.innerHTML =
+
+`
+
+<div class="glass-card">
+
+<h2>
+
+Error Loading Report
+
+</h2>
+
+<p>
+
+Please try again later.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+loadDetails();
+
+// =========================================
+// SHARE
+// =========================================
+
+window.shareReport = function(){
+
+if(navigator.share){
+
+navigator.share({
+
+title:"SafeReturn Emergency Report",
+
+text:"Please help share this emergency report.",
+
+url:window.location.href
+
+});
+
+}
+else{
+
+navigator.clipboard.writeText(
+
+window.location.href
+
+);
+
+alert(
+
+"Report link copied"
+
+);
+
+}
+
+};
+
+// =========================================
+// LOADER
+// =========================================
+
+window.addEventListener(
+
+"load",
+
+()=>{
+
+setTimeout(()=>{
+
+document.getElementById("loader")
+
+.classList.add("hide");
+
+},700);
+
+}
+
+);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Login | SafeReturn</title>
+
+<link
+rel="stylesheet"
+href="./style.css">
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- GLOWS -->
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+Safe<span>Return</span>
+
+</div>
+
+<div class="nav-links">
+
+<a
+href="./index.html"
+class="nav-item">
+
+<i class="fa-solid fa-house"></i>
+
+Home
+
+</a>
+
+<a
+href="./login.html"
+class="nav-item active-nav">
+
+<i class="fa-regular fa-user"></i>
+
+Login
+
+</a>
+
+<a
+href="./signup.html"
+class="nav-item">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Signup
+
+</a>
+
+<a
+href="./profile.html"
+class="nav-item">
+
+<i class="fa-regular fa-circle-user"></i>
+
+Profile
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- LOGIN -->
+
+<section class="auth-page">
+
+<div class="auth-box">
+
+<div class="auth-icon">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+</div>
+
+<h1>
+
+Welcome Back
+
+</h1>
+
+<p>
+
+Login to SafeReturn and help reunite families faster using AI-powered emergency response tools.
+
+</p>
+
+<form id="loginForm">
+
+<!-- EMAIL -->
+
+<label>Email Address</label>
+
+<div class="modern-input">
+
+<i class="fa-regular fa-envelope"></i>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required>
+
+</div>
+
+<!-- PASSWORD -->
+
+<label>Password</label>
+
+<div class="modern-input">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+required>
+
+<i
+class="fa-regular fa-eye password-toggle"
+onclick="togglePassword()">
+
+</i>
+
+</div>
+
+<!-- BUTTON -->
+
+<button
+type="submit"
+class="modern-btn">
+
+Login
+
+</button>
+
+<!-- DIVIDER -->
+
+<div class="divider">
+
+<span>or</span>
+
+</div>
+
+<!-- GOOGLE -->
+
+<button
+type="button"
+id="googleLogin"
+class="google-btn-modern">
+
+<img
+src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
+
+Continue With Google
+
+</button>
+
+<!-- LINKS -->
+
+<div class="bottom-links">
+
+Don't have an account?
+
+<a href="./signup.html">
+
+Sign up
+
+</a>
+
+</div>
+
+<div class="bottom-links">
+
+<a href="./index.html">
+
+Back To Home
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+<script type="module">
+
+import {
+
+auth
+
+}
+
+from "./firebase.js";
+
+import {
+
+signInWithEmailAndPassword,
+GoogleAuthProvider,
+signInWithPopup
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+// =========================================
+// LOGIN
+// =========================================
+
+document.getElementById("loginForm")
+
+.addEventListener(
+
+"submit",
+
+async(e)=>{
+
+e.preventDefault();
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+try{
+
+await signInWithEmailAndPassword(
+
+auth,
+email,
+password
+
+);
+
+alert(
+
+"Login successful"
+
+);
+
+window.location.href =
+"./profile.html";
+
+}
+catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+);
+
+// =========================================
+// GOOGLE LOGIN
+// =========================================
+
+document.getElementById("googleLogin")
+
+.addEventListener(
+
+"click",
+
+async()=>{
+
+try{
+
+const provider =
+new GoogleAuthProvider();
+
+await signInWithPopup(
+
+auth,
+provider
+
+);
+
+window.location.href =
+"./profile.html";
+
+}
+catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+);
+
+// =========================================
+// PASSWORD TOGGLE
+// =========================================
+
+window.togglePassword = function(){
+
+const input =
+document.getElementById("password");
+
+const icon =
+document.querySelector(".password-toggle");
+
+if(input.type === "password"){
+
+input.type = "text";
+
+icon.classList.remove("fa-eye");
+
+icon.classList.add("fa-eye-slash");
+
+}
+else{
+
+input.type = "password";
+
+icon.classList.remove("fa-eye-slash");
+
+icon.classList.add("fa-eye");
+
+}
+
+};
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SafeReturn</title>
+
+<link
+rel="stylesheet"
+href="./style.css?v=9999">
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet">
+
+<link
+rel="manifest"
+href="./manifest.json">
+
+<meta
+name="theme-color"
+content="#020617">
+
+</head>
+
+<link rel="manifest" href="./manifest.json">
+
+<meta name="theme-color" content="#020617">
+
+<link
+rel="apple-touch-icon"
+href="./icons/icon-192.png">
+
+<body>
+
+<!-- LOADER -->
+
+<div
+class="loading-screen"
+id="loader">
+
+<div class="loading-spinner"></div>
+
+<div class="loading-text">
+
+Loading SafeReturn...
+
+</div>
+
+</div>
+
+<!-- LIVE ALERT -->
+
+<div
+id="liveAlert"
+class="live-alert"
+style="display:none;">
+
+<h3>
+
+🚨 Emergency Alert
+
+</h3>
+
+<p id="liveAlertText">
+
+Loading...
+
+</p>
+
+</div>
+
+<!-- GLOWS -->
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+Safe<span>Return</span>
+
+</div>
+
+<div class="nav-links">
+
+<a
+href="./index.html"
+class="nav-item active-nav">
+
+<i class="fa-solid fa-house"></i>
+
+Home
+
+</a>
+
+<a
+href="./login.html"
+class="nav-item">
+
+<i class="fa-regular fa-user"></i>
+
+Login
+
+</a>
+
+<a
+href="./signup.html"
+class="nav-item">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Signup
+
+</a>
+
+<a
+href="./profile.html"
+class="nav-item">
+
+<i class="fa-regular fa-circle-user"></i>
+
+Profile
+
+</a>
+
+<a
+href="./admin.html"
+class="nav-item">
+
+<i class="fa-solid fa-user-shield"></i>
+
+Admin
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero fade-up">
+
+<h1>
+
+Helping Families
+<span>Reconnect Faster</span>
+
+</h1>
+
+<p>
+
+SafeReturn is an AI-powered emergency response platform designed to help reunite missing children, elderly individuals, vulnerable people, and lost pets using realtime alerts, GPS tracking, AI face recognition, CCTV evidence, emergency SOS systems, volunteer coordination, and rescue tools.
+
+</p>
+
+<!-- BUTTONS -->
+
+<div
+style="
+display:flex;
+justify-content:center;
+gap:18px;
+flex-wrap:wrap;
+margin-top:45px;
+">
+
+<a
+href="./report.html"
+class="btn btn-danger">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+Report Missing
+
+</a>
+
+<a
+href="./found.html"
+class="btn btn-success">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Report Found
+
+</a>
+
+<a
+href="./face-match.html"
+class="btn btn-warning">
+
+<i class="fa-solid fa-user-secret"></i>
+
+AI Face Match
+
+</a>
+
+<a
+href="./map.html"
+class="btn btn-primary">
+
+<i class="fa-solid fa-map-location-dot"></i>
+
+Emergency Map
+
+</a>
+
+<a
+href="./cctv.html"
+class="btn btn-white">
+
+<i class="fa-solid fa-video"></i>
+
+CCTV Portal
+
+</a>
+
+<a
+href="./payment.html"
+class="btn btn-purple">
+
+<i class="fa-solid fa-heart-circle-dollar"></i>
+
+Donate
+
+</a>
+
+</div>
+
+</section>
+
+<!-- REPORTS -->
+
+<section class="section fade-up">
+
+<h2 class="section-title">
+
+Live Emergency Reports
+
+</h2>
+
+<!-- SEARCH -->
+
+<div class="premium-search">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search by name, location or pincode...">
+
+</div>
+
+<div class="search-box small-search">
+
+<i class="fa-solid fa-filter"></i>
+
+<select id="categoryFilter">
+
+<option value="all">
+
+All Categories
+
+</option>
+
+<option value="missing">
+
+Missing People
+
+</option>
+
+<option value="elderly">
+
+Missing Elderly
+
+</option>
+
+<option value="pet">
+
+Lost Pets
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- REPORT GRID -->
+
+<div
+class="grid"
+id="reportsGrid">
+
+<div class="glass-card">
+
+<h2>
+
+Loading Reports...
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- WHY THIS WAS MADE -->
+
+<section class="story-section fade-up">
+
+<div class="story-box">
+
+<h2>
+
+Why SafeReturn Was Created
+
+</h2>
+
+<p>
+
+Last year, I got separated from my family in a crowded temple.
+
+For a few terrifying minutes, I had absolutely no idea where they were. The crowd kept moving, people were everywhere, and despite trying to search for them, I felt completely lost and helpless. Even though it may not sound like a long time, in that moment it felt endless.
+
+What scared me most was realizing how quickly someone can disappear in a crowded place — especially children, elderly people, or vulnerable individuals.
+
+After finally reuniting with my family, I couldn’t stop thinking about that experience. I kept wondering how many families go through situations far worse than mine every single day, and how difficult it must be when someone is not found quickly.
+
+Since that day, I secretly started working on an idea that could genuinely help people during emergencies.
+
+That idea slowly became SafeReturn.
+
+SafeReturn was built as an AI-powered emergency response platform designed to help reunite missing people and families faster using realtime alerts, AI face recognition, GPS systems, emergency SOS broadcasts, CCTV evidence uploads, volunteer coordination, and rescue tools.
+
+This project is not just a school project to me.
+
+It is something deeply personal that I have been quietly building ever since that experience, with the hope that technology can help prevent families from experiencing the same fear and panic that I felt that day.
+
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 SafeReturn —
+Built to reconnect families faster.
+
+</footer>
+
+<!-- SOS BUTTON -->
+
+<button
+class="sos-button"
+onclick="openSOS()">
+
+🚨
+
+</button>
+
+<!-- SOS MODAL -->
+
+<div
+id="sosModal"
+class="sos-modal"
+style="display:none;">
+
+<div class="sos-box">
+
+<h1>
+
+🚨 SOS ALERT
+
+</h1>
+
+<p>
+
+Emergency broadcast mode activated.
+
+Nearby volunteers and users should immediately check live alerts and emergency reports.
+
+</p>
+
+<div class="sos-actions">
+
+<button
+class="btn btn-white"
+onclick="shareSOS()">
+
+Share Emergency
+
+</button>
+
+<button
+class="btn btn-warning"
+onclick="triggerSiren()">
+
+Activate Siren
+
+</button>
+
+<button
+class="btn btn-danger"
+onclick="closeSOS()">
+
+Close Alert
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import {
+
+db
+
+}
+
+from "./firebase.js?v=9999";
+
+import {
+
+collection,
+query,
+orderBy,
+onSnapshot
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+// =========================================
+// ELEMENTS
+// =========================================
+
+const reportsGrid =
+
+document.getElementById(
+
+"reportsGrid"
+
+);
+
+let unsubscribeReports = null;
+
+// =========================================
+// LOAD REPORTS
+// =========================================
+
+function loadReports(){
+
+if(unsubscribeReports){
+
+unsubscribeReports();
+
+}
+
+const q = query(
+
+collection(db,"reports"),
+
+orderBy("createdAt","desc")
+
+);
+
+unsubscribeReports = onSnapshot(
+
+q,
+
+(snapshot)=>{
+
+reportsGrid.innerHTML = "";
+
+// =========================================
+// FILTER VALUES
+// =========================================
+
+const searchValue =
+
+document.getElementById(
+
+"searchInput"
+
+)
+
+.value
+
+.toLowerCase();
+
+const categoryValue =
+
+document.getElementById(
+
+"categoryFilter"
+
+).value;
+
+// =========================================
+// EMPTY
+// =========================================
+
+if(snapshot.empty){
+
+reportsGrid.innerHTML =
+
+`
+
+<div class="glass-card">
+
+<h2>
+
+No Reports Yet
+
+</h2>
+
+<p>
+
+No active emergency reports available.
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+// =========================================
+// LOOP
+// =========================================
+
+snapshot.forEach((docSnap,index)=>{
+
+const data =
+docSnap.data();
+
+// =========================================
+// SEARCH
+// =========================================
+
+const matchesSearch =
+
+data.name
+?.toLowerCase()
+.includes(searchValue)
+
+||
+
+data.location
+?.toLowerCase()
+.includes(searchValue)
+
+||
+
+data.pincode
+?.toString()
+.includes(searchValue);
+
+// =========================================
+// CATEGORY
+// =========================================
+
+const matchesCategory =
+
+categoryValue === "all"
+
+||
+
+data.category === categoryValue;
+
+if(
+
+!matchesSearch ||
+
+!matchesCategory
+
+){
+
+return;
+
+}
+
+// =========================================
+// BADGE
+// =========================================
+
+let badge = "👶";
+
+if(data.category === "elderly"){
+
+badge = "👴";
+
+}
+
+if(data.category === "pet"){
+
+badge = "🐶";
+
+}
+
+// =========================================
+// LIVE ALERT
+// =========================================
+
+setTimeout(()=>{
+
+const liveAlert =
+
+document.getElementById(
+
+"liveAlert"
+
+);
+
+const liveAlertText =
+
+document.getElementById(
+
+"liveAlertText"
+
+);
+
+liveAlertText.innerHTML =
+
+`
+
+<b>${data.name}</b>
+
+reported near
+
+<b>${data.location}</b>
+
+`;
+
+liveAlert.style.display =
+"block";
+
+setTimeout(()=>{
+
+liveAlert.style.display =
+"none";
+
+},5000);
+
+},1500 * (index + 1));
+
+// =========================================
+// CARD
+// =========================================
+
+reportsGrid.innerHTML +=
+
+`
+
+<div class="report-card fade-up">
+
+<img src="${data.image}">
+
+<div class="category-badge">
+
+${badge}
+
+${data.category}
+
+</div>
+
+<h3>
+
+${data.name}
+
+</h3>
+
+<p>
+
+<b>Type:</b>
+${data.type}
+
+<br><br>
+
+<b>Location:</b>
+${data.location}
+
+<br><br>
+
+<b>Pincode:</b>
+${data.pincode || "N/A"}
+
+<br><br>
+
+<b>Emergency Contact:</b>
+${data.contact || "N/A"}
+
+<br><br>
+
+${data.description}
+
+</p>
+
+<br>
+
+<div
+style="
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+">
+
+<a
+href="./details.html?id=${docSnap.id}"
+class="btn btn-primary">
+
+View Details
+
+</a>
+
+<a
+href="./poster.html?id=${docSnap.id}"
+class="btn btn-purple">
+
+Generate Poster
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+);
+
+}
+
+loadReports();
+
+// =========================================
+// FILTER EVENTS
+// =========================================
+
+document.getElementById(
+
+"searchInput"
+
+)
+
+.addEventListener(
+
+"input",
+
+loadReports
+
+);
+
+document.getElementById(
+
+"categoryFilter"
+
+)
+
+.addEventListener(
+
+"change",
+
+loadReports
+
+);
+
+// =========================================
+// LOADER
+// =========================================
+
+window.addEventListener(
+
+"load",
+
+()=>{
+
+setTimeout(()=>{
+
+document.getElementById(
+
+"loader"
+
+)
+
+.classList.add(
+
+"hide"
+
+);
+
+},700);
+
+}
+
+);
+
+// =========================================
+// SERVICE WORKER
+// =========================================
+
+if("serviceWorker" in navigator){
+
+window.addEventListener(
+
+"load",
+
+()=>{
+
+navigator.serviceWorker.register(
+
+"./sw.js?v=9999"
+
+);
+
+}
+
+);
+
+}
+
+// =========================================
+// SOS
+// =========================================
+
+window.openSOS = function(){
+
+document.getElementById(
+
+"sosModal"
+
+)
+
+.style.display =
+"flex";
+
+};
+
+window.closeSOS = function(){
+
+document.getElementById(
+
+"sosModal"
+
+)
+
+.style.display =
+"none";
+
+};
+
+window.shareSOS = function(){
+
+if(navigator.share){
+
+navigator.share({
+
+title:"SafeReturn SOS",
+
+text:"Emergency alert from SafeReturn",
+
+url:window.location.href
+
+});
+
+}
+else{
+
+navigator.clipboard.writeText(
+
+"Emergency alert from SafeReturn"
+
+);
+
+alert(
+
+"Emergency message copied"
+
+);
+
+}
+
+};
+
+window.triggerSiren = function(){
+
+const audio =
+
+new Audio(
+
+"https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
+
+);
+
+audio.play();
+
+};
+
+</script>
+
+</body>
+
+</html>

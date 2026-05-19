@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Volunteer Network | SafeReturn</title>
+
+<link
+rel="stylesheet"
+href="./style.css">
+
+</head>
+
+<body>
+
+<!-- GLOWS -->
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<!-- NAV -->
+
+<nav>
+
+<div class="logo">
+
+Safe<span>Return</span>
+
+</div>
+
+<div class="nav-links">
+
+<a
+href="./index.html"
+class="btn btn-glass">
+
+Back Home
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero fade-up">
+
+<h1>
+
+Become A
+<span>Volunteer Hero</span>
+
+</h1>
+
+<p>
+
+Join the SafeReturn emergency volunteer network and help reunite missing children, elderly people, and vulnerable individuals with their families. Volunteers can help spread alerts, assist in searches, support local communities, and improve emergency response times. Every volunteer increases the chances of safe recovery. Together, communities become stronger, faster, and safer.
+
+</p>
+
+</section>
+
+<!-- FORM -->
+
+<section class="section fade-up">
+
+<div
+class="glass-card"
+style="
+max-width:850px;
+margin:auto;
+">
+
+<h2
+class="section-title"
+style="
+margin-bottom:15px;
+">
+
+Volunteer Registration
+
+</h2>
+
+<p
+style="
+text-align:center;
+line-height:2;
+color:var(--muted);
+margin-bottom:40px;
+">
+
+Register as a SafeReturn volunteer and become part of the live emergency response network.
+
+</p>
+
+<form id="volunteerForm">
+
+<!-- NAME -->
+
+<div class="form-group">
+
+<label>
+
+Full Name
+
+</label>
+
+<input
+type="text"
+id="name"
+class="input"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+<!-- EMAIL -->
+
+<div class="form-group">
+
+<label>
+
+Email Address
+
+</label>
+
+<input
+type="email"
+id="email"
+class="input"
+placeholder="Enter your email"
+required>
+
+</div>
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<label>
+
+Phone Number
+
+</label>
+
+<input
+type="text"
+id="phone"
+class="input"
+placeholder="Enter your phone number"
+required>
+
+</div>
+
+<!-- CITY -->
+
+<div class="form-group">
+
+<label>
+
+City / Area
+
+</label>
+
+<input
+type="text"
+id="city"
+class="input"
+placeholder="Enter your city or area"
+required>
+
+</div>
+
+<!-- EXPERIENCE -->
+
+<div class="form-group">
+
+<label>
+
+Skills / Experience
+
+</label>
+
+<textarea
+id="skills"
+class="input"
+placeholder="Search assistance, medical help, social media support, local knowledge, etc">
+
+</textarea>
+
+</div>
+
+<!-- BUTTON -->
+
+<button
+type="submit"
+class="btn btn-primary">
+
+Join Volunteer Network
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- BENEFITS -->
+
+<section class="section fade-up">
+
+<h2 class="section-title">
+
+Why Volunteers Matter
+
+</h2>
+
+<div class="grid">
+
+<div class="glass-card">
+
+<h2>
+
+Faster Local Response
+
+</h2>
+
+<p>
+
+Nearby volunteers can help spread awareness and assist families much faster during emergencies.
+
+</p>
+
+</div>
+
+<div class="glass-card">
+
+<h2>
+
+Community Safety
+
+</h2>
+
+<p>
+
+Stronger volunteer networks improve public safety and increase rescue success rates.
+
+</p>
+
+</div>
+
+<div class="glass-card">
+
+<h2>
+
+Real Impact
+
+</h2>
+
+<p>
+
+Even a single volunteer action can help reunite a family and change lives forever.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 SafeReturn —
+Powered by community volunteers.
+
+</footer>
+
+<!-- SCRIPT -->
+
+<script type="module">
+
+import {
+
+db
+
+}
+
+from "./firebase.js";
+
+import {
+
+collection,
+addDoc,
+serverTimestamp
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+// =========================================
+// SUBMIT FORM
+// =========================================
+
+document.getElementById("volunteerForm")
+
+.addEventListener(
+
+"submit",
+
+async (e)=>{
+
+e.preventDefault();
+
+try{
+
+const name =
+document.getElementById("name").value;
+
+const email =
+document.getElementById("email").value;
+
+const phone =
+document.getElementById("phone").value;
+
+const city =
+document.getElementById("city").value;
+
+const skills =
+document.getElementById("skills").value;
+
+// =========================================
+// SAVE TO FIRESTORE
+// =========================================
+
+await addDoc(
+
+collection(db,"volunteers"),
+
+{
+
+name,
+email,
+phone,
+city,
+skills,
+
+createdAt:
+serverTimestamp()
+
+}
+
+);
+
+alert("Volunteer Registration Successful");
+
+document.getElementById("volunteerForm").reset();
+
+}
+catch(error){
+
+console.log(error);
+
+alert(error.message);
+
+}
+
+}
+
+);
+
+</script>
+
+</body>
+
+</html>

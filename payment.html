@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Donate | SafeReturn</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<!-- PAYPAL -->
+
+<script
+src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD">
+
+</script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(
+135deg,
+#03132b,
+#082041,
+#12386c
+);
+
+min-height:100vh;
+
+padding:40px;
+
+overflow-x:hidden;
+
+color:white;
+
+}
+
+/* BG */
+
+.bg1,
+.bg2{
+
+position:fixed;
+
+width:450px;
+height:450px;
+
+border-radius:50%;
+
+filter:blur(140px);
+
+opacity:0.15;
+
+z-index:-1;
+
+}
+
+.bg1{
+
+background:#8b5cf6;
+
+top:-120px;
+left:-120px;
+
+}
+
+.bg2{
+
+background:#38bdf8;
+
+bottom:-120px;
+right:-120px;
+
+}
+
+/* HEADER */
+
+.header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:45px;
+
+flex-wrap:wrap;
+
+gap:20px;
+
+}
+
+.logo{
+
+font-size:42px;
+font-weight:800;
+
+}
+
+.logo span{
+
+color:#38bdf8;
+
+}
+
+.back-btn{
+
+padding:14px 22px;
+
+border-radius:16px;
+
+text-decoration:none;
+
+background:
+rgba(255,255,255,0.08);
+
+color:white;
+
+font-weight:700;
+
+}
+
+/* CARD */
+
+.card{
+
+max-width:850px;
+
+margin:auto;
+
+background:
+rgba(255,255,255,0.08);
+
+padding:40px;
+
+border-radius:35px;
+
+backdrop-filter:blur(18px);
+
+box-shadow:
+0 20px 45px rgba(0,0,0,0.35);
+
+text-align:center;
+
+}
+
+.card h1{
+
+font-size:58px;
+
+margin-bottom:20px;
+
+}
+
+.card p{
+
+line-height:2;
+
+color:#dbeafe;
+
+margin-bottom:35px;
+
+font-size:18px;
+
+}
+
+/* INPUT */
+
+.amount-box{
+
+margin-bottom:30px;
+
+}
+
+.amount-box input{
+
+width:100%;
+
+padding:22px;
+
+border:none;
+
+outline:none;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,0.08);
+
+color:white;
+
+font-size:22px;
+
+text-align:center;
+
+}
+
+.amount-box input::placeholder{
+
+color:#dbeafe;
+
+}
+
+/* BUTTON */
+
+.generate-btn{
+
+width:100%;
+
+padding:22px;
+
+border:none;
+
+border-radius:22px;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:0.35s ease;
+
+margin-top:20px;
+
+color:white;
+
+background:
+linear-gradient(
+135deg,
+#8b5cf6,
+#7c3aed
+);
+
+}
+
+.generate-btn:hover{
+
+transform:
+translateY(-4px);
+
+}
+
+/* QR */
+
+.qr-container{
+
+margin-top:35px;
+
+display:none;
+
+}
+
+.qr-container img{
+
+width:300px;
+
+height:300px;
+
+background:white;
+
+padding:18px;
+
+border-radius:30px;
+
+}
+
+/* PAYPAL */
+
+#paypal-button-container{
+
+margin-top:35px;
+
+display:none;
+
+}
+
+/* UPI */
+
+.upi{
+
+margin-top:30px;
+
+font-size:20px;
+
+font-weight:700;
+
+color:#dbeafe;
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+body{
+
+padding:20px;
+
+}
+
+.card h1{
+
+font-size:42px;
+
+}
+
+.logo{
+
+font-size:34px;
+
+}
+
+.qr-container img{
+
+width:240px;
+height:240px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg1"></div>
+<div class="bg2"></div>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="logo">
+
+Safe<span>Return</span>
+
+</div>
+
+<a
+href="./index.html"
+class="back-btn">
+
+Back To Home
+
+</a>
+
+</div>
+
+<!-- CARD -->
+
+<div class="card">
+
+<h1>
+
+Support SafeReturn
+
+</h1>
+
+<p>
+
+Your donation helps improve alerts, AI systems and rescue operations.
+
+</p>
+
+<!-- AMOUNT -->
+
+<div class="amount-box">
+
+<input
+type="number"
+id="amount"
+placeholder="Enter Donation Amount">
+
+</div>
+
+<!-- BUTTON -->
+
+<button
+class="generate-btn"
+onclick="generatePayment()">
+
+Generate QR
+
+</button>
+
+<!-- QR -->
+
+<div
+class="qr-container"
+id="qrContainer">
+
+<img
+id="qrImage"
+src="">
+
+</div>
+
+<!-- UPI -->
+
+<div class="upi">
+
+UPI ID:
+varad3808@ibl
+
+</div>
+
+<!-- PAYPAL -->
+
+<div id="paypal-button-container"></div>
+
+</div>
+
+<script>
+
+function generatePayment(){
+
+const amount =
+document.getElementById("amount").value;
+
+if(!amount){
+
+alert("Enter amount");
+
+return;
+
+}
+
+/* QR */
+
+const upiLink =
+`upi://pay?pa=varad3808@ibl&pn=SafeReturn&am=${amount}&cu=INR`;
+
+const qrCode =
+`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiLink)}`;
+
+document.getElementById("qrImage")
+.src = qrCode;
+
+document.getElementById("qrContainer")
+.style.display = "block";
+
+/* PAYPAL */
+
+const paypalContainer =
+document.getElementById("paypal-button-container");
+
+paypalContainer.style.display =
+"block";
+
+paypalContainer.innerHTML = "";
+
+/* PAYPAL BUTTON */
+
+paypal.Buttons({
+
+createOrder: function(data, actions){
+
+return actions.order.create({
+
+purchase_units:[{
+
+amount:{
+
+value: amount
+
+}
+
+}]
+
+});
+
+},
+
+onApprove: function(data, actions){
+
+return actions.order.capture()
+
+.then(function(details){
+
+alert(
+
+"Donation Successful! Thank you " +
+
+details.payer.name.given_name
+
+);
+
+});
+
+}
+
+}).render('#paypal-button-container');
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Poster Generator | SafeReturn</title>
+
+<link
+rel="stylesheet"
+href="./style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet">
+
+<style>
+
+.poster-preview{
+
+background:white;
+color:black;
+padding:45px;
+border-radius:35px;
+min-height:900px;
+position:relative;
+overflow:hidden;
+box-shadow:
+0 0 80px rgba(0,0,0,0.45);
+
+}
+
+.poster-alert{
+
+background:
+linear-gradient(
+135deg,
+#dc2626,
+#ef4444
+);
+
+color:white;
+
+padding:28px;
+
+border-radius:24px;
+
+text-align:center;
+
+font-size:58px;
+
+font-weight:900;
+
+letter-spacing:3px;
+
+margin-bottom:35px;
+
+box-shadow:
+0 0 40px rgba(239,68,68,0.4);
+
+}
+
+.poster-image{
+
+width:100%;
+
+height:480px;
+
+object-fit:cover;
+
+border-radius:28px;
+
+margin-bottom:35px;
+
+display:none;
+
+border:6px solid #0f172a;
+
+}
+
+.poster-name{
+
+font-size:72px;
+
+font-weight:900;
+
+margin-bottom:30px;
+
+line-height:1;
+
+color:#020617;
+
+}
+
+.poster-details{
+
+line-height:2.1;
+
+font-size:28px;
+
+color:#111827;
+
+}
+
+.poster-details b{
+
+color:#2563eb;
+
+}
+
+.poster-description-box{
+
+margin-top:35px;
+
+background:#f1f5f9;
+
+padding:30px;
+
+border-radius:24px;
+
+font-size:24px;
+
+line-height:1.9;
+
+color:#0f172a;
+
+border-left:10px solid #2563eb;
+
+}
+
+.poster-bottom{
+
+margin-top:50px;
+
+background:
+linear-gradient(
+135deg,
+#03132b,
+#0f172a
+);
+
+color:white;
+
+padding:28px;
+
+border-radius:24px;
+
+text-align:center;
+
+font-weight:800;
+
+font-size:22px;
+
+line-height:1.8;
+
+}
+
+.poster-buttons{
+
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+
+}
+
+.poster-buttons button{
+
+flex:1;
+
+}
+
+@media(max-width:1000px){
+
+.poster-grid{
+
+grid-template-columns:1fr !important;
+
+}
+
+.poster-alert{
+
+font-size:36px;
+
+}
+
+.poster-name{
+
+font-size:46px;
+
+}
+
+.poster-details{
+
+font-size:20px;
+
+}
+
+.poster-description-box{
+
+font-size:18px;
+
+}
+
+.poster-image{
+
+height:320px;
+
+}
+
+.poster-preview{
+
+padding:25px;
+
+min-height:auto;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- GLOWS -->
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<!-- NAV -->
+
+<nav>
+
+<div class="logo">
+
+Safe<span>Return</span>
+
+</div>
+
+<div class="nav-links">
+
+<a
+href="./index.html"
+class="btn btn-glass">
+
+Back Home
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero fade-up">
+
+<h1>
+
+Emergency
+<span>Poster Generator</span>
+
+</h1>
+
+<p>
+
+Generate premium printable emergency posters instantly for missing person alerts and rescue operations.
+
+</p>
+
+</section>
+
+<!-- GENERATOR -->
+
+<section class="section fade-up">
+
+<div
+class="glass-card"
+style="
+max-width:1400px;
+margin:auto;
+padding:45px;
+">
+
+<div
+style="
+display:grid;
+grid-template-columns:1fr 1.2fr;
+gap:50px;
+align-items:start;
+"
+class="poster-grid">
+
+<!-- FORM -->
+
+<div>
+
+<div class="form-group">
+
+<label>
+
+Missing Person Name
+
+</label>
+
+<input
+type="text"
+id="name"
+class="input"
+placeholder="Enter full name">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Age
+
+</label>
+
+<input
+type="number"
+id="age"
+class="input"
+placeholder="Enter age">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Last Seen Location
+
+</label>
+
+<input
+type="text"
+id="location"
+class="input"
+placeholder="Enter location">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Emergency Contact
+
+</label>
+
+<input
+type="text"
+id="contact"
+class="input"
+placeholder="Enter contact number">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Description
+
+</label>
+
+<textarea
+id="description"
+class="input"
+placeholder="Describe appearance and situation"
+style="min-height:160px;">
+
+</textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Upload Image
+
+</label>
+
+<input
+type="file"
+id="image"
+class="input"
+accept="image/*">
+
+</div>
+
+<br>
+
+<div class="poster-buttons">
+
+<button
+class="btn btn-danger"
+onclick="generatePoster()">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+Generate Poster
+
+</button>
+
+<button
+class="btn btn-primary"
+onclick="downloadPoster()">
+
+<i class="fa-solid fa-download"></i>
+
+Download Poster
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PREVIEW -->
+
+<div>
+
+<div
+id="poster"
+class="poster-preview">
+
+<div class="poster-alert">
+
+🚨 MISSING ALERT 🚨
+
+</div>
+
+<img
+id="posterImage"
+class="poster-image"
+src="">
+
+<h1
+id="posterName"
+class="poster-name">
+
+Unknown
+
+</h1>
+
+<div class="poster-details">
+
+<b>Age:</b>
+<span id="posterAge">
+
+N/A
+
+</span>
+
+<br><br>
+
+<b>Last Seen Location:</b>
+<span id="posterLocation">
+
+Unknown
+
+</span>
+
+<br><br>
+
+<b>Emergency Contact:</b>
+<span id="posterContact">
+
+N/A
+
+</span>
+
+</div>
+
+<div class="poster-description-box">
+
+<b>Description:</b>
+
+<br><br>
+
+<span id="posterDescription">
+
+No description provided.
+
+</span>
+
+</div>
+
+<div class="poster-bottom">
+
+Generated by SafeReturn Emergency Network
+
+<br>
+
+AI Powered Rescue Coordination System
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 SafeReturn —
+Emergency poster generation system.
+
+</footer>
+
+<!-- SCRIPT -->
+
+<script>
+
+// =========================================
+// GENERATE POSTER
+// =========================================
+
+function generatePoster(){
+
+const name =
+document.getElementById("name").value;
+
+const age =
+document.getElementById("age").value;
+
+const location =
+document.getElementById("location").value;
+
+const contact =
+document.getElementById("contact").value;
+
+const description =
+document.getElementById("description").value;
+
+const imageFile =
+document.getElementById("image").files[0];
+
+// =========================================
+// TEXT
+// =========================================
+
+document.getElementById("posterName")
+
+.innerText =
+name || "Unknown";
+
+document.getElementById("posterAge")
+
+.innerText =
+age || "N/A";
+
+document.getElementById("posterLocation")
+
+.innerText =
+location || "Unknown";
+
+document.getElementById("posterContact")
+
+.innerText =
+contact || "N/A";
+
+document.getElementById("posterDescription")
+
+.innerText =
+description || "No description provided.";
+
+// =========================================
+// IMAGE
+// =========================================
+
+if(imageFile){
+
+const reader =
+new FileReader();
+
+reader.onload = function(e){
+
+const posterImage =
+document.getElementById("posterImage");
+
+posterImage.src =
+e.target.result;
+
+posterImage.style.display =
+"block";
+
+};
+
+reader.readAsDataURL(imageFile);
+
+}
+
+}
+
+// =========================================
+// DOWNLOAD
+// =========================================
+
+async function downloadPoster(){
+
+const poster =
+document.getElementById("poster");
+
+const canvas =
+
+await html2canvas(
+
+poster,
+
+{
+
+scale:2
+
+}
+
+);
+
+const link =
+document.createElement("a");
+
+link.download =
+"SafeReturn-Poster.png";
+
+link.href =
+canvas.toDataURL();
+
+link.click();
+
+}
+
+</script>
+
+</body>
+
+</html>

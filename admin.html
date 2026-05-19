@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel | SafeReturn</title>
+
+<link
+rel="stylesheet"
+href="./style.css">
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<!-- GLOWS -->
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+Safe<span>Return</span>
+
+</div>
+
+<div class="nav-links">
+
+<a
+href="./index.html"
+class="nav-item">
+
+<i class="fa-solid fa-house"></i>
+
+Home
+
+</a>
+
+<a
+href="./admin.html"
+class="nav-item active-nav">
+
+<i class="fa-solid fa-user-shield"></i>
+
+Admin
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- PAGE -->
+
+<section class="section">
+
+<h1 class="section-title">
+
+Admin Dashboard
+
+</h1>
+
+<!-- SEARCH -->
+
+<div class="premium-search">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+id="adminSearch"
+placeholder="Search reports, users, districts...">
+
+</div>
+
+</div>
+
+<!-- STATS -->
+
+<div class="grid">
+
+<div class="glass-card">
+
+<h2>
+
+📢 Total Reports
+
+</h2>
+
+<h1
+id="totalReports"
+style="
+font-size:70px;
+margin-top:20px;
+">
+
+0
+
+</h1>
+
+</div>
+
+<div class="glass-card">
+
+<h2>
+
+✅ Found Cases
+
+</h2>
+
+<h1
+id="foundReports"
+style="
+font-size:70px;
+margin-top:20px;
+">
+
+0
+
+</h1>
+
+</div>
+
+<div class="glass-card">
+
+<h2>
+
+🚨 Active Missing
+
+</h2>
+
+<h1
+id="missingReports"
+style="
+font-size:70px;
+margin-top:20px;
+">
+
+0
+
+</h1>
+
+</div>
+
+<div class="glass-card">
+
+<h2>
+
+👥 Users
+
+</h2>
+
+<h1
+id="totalUsers"
+style="
+font-size:70px;
+margin-top:20px;
+">
+
+0
+
+</h1>
+
+</div>
+
+</div>
+
+<br><br>
+
+<!-- ANALYTICS -->
+
+<div class="glass-card">
+
+<h2
+style="
+margin-bottom:30px;
+">
+
+📊 Rescue Statistics
+
+</h2>
+
+<canvas id="statsChart"></canvas>
+
+</div>
+
+<br><br>
+
+<!-- REPORT MODERATION -->
+
+<h2
+class="section-title"
+style="
+font-size:42px;
+">
+
+Moderation Queue
+
+</h2>
+
+<div
+class="grid"
+id="adminReports">
+
+<div class="glass-card">
+
+<h2>
+
+Loading Reports...
+
+</h2>
+
+</div>
+
+</div>
+
+<br><br>
+
+<!-- AUDIT LOGS -->
+
+<div class="glass-card">
+
+<h2
+style="
+margin-bottom:25px;
+">
+
+📝 Audit Logs
+
+</h2>
+
+<div id="auditLogs">
+
+<p>
+
+No logs yet.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<script type="module">
+
+import {
+
+db,
+auth
+
+}
+
+from "./firebase.js";
+
+import {
+
+collection,
+query,
+orderBy,
+onSnapshot,
+deleteDoc,
+doc,
+addDoc,
+serverTimestamp
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+import {
+
+onAuthStateChanged
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+// =========================================
+// ADMIN EMAIL
+// =========================================
+
+const ADMIN_EMAIL =
+
+"varad3808@gmail.com";
+
+// =========================================
+// AUTH CHECK
+// =========================================
+
+onAuthStateChanged(
+
+auth,
+
+(user)=>{
+
+if(!user){
+
+window.location.href =
+"./login.html";
+
+return;
+
+}
+
+if(
+
+user.email !== ADMIN_EMAIL
+
+){
+
+document.body.innerHTML =
+
+`
+
+<div
+style="
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#020617;
+color:white;
+font-family:Inter,sans-serif;
+padding:20px;
+">
+
+<div
+style="
+max-width:700px;
+width:100%;
+padding:50px;
+border-radius:30px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+text-align:center;
+">
+
+<h1
+style="
+font-size:60px;
+margin-bottom:20px;
+color:#ef4444;
+">
+
+ACCESS DENIED
+
+</h1>
+
+<p
+style="
+font-size:22px;
+line-height:1.8;
+color:#cbd5e1;
+">
+
+Only authorized admins can access this panel.
+
+</p>
+
+</div>
+
+</div>
+
+`;
+
+return;
+
+}
+
+loadReports();
+
+}
+
+);
+
+// =========================================
+// LOAD REPORTS
+// =========================================
+
+function loadReports(){
+
+const q = query(
+
+collection(db,"reports"),
+
+orderBy("createdAt","desc")
+
+);
+
+onSnapshot(
+
+q,
+
+(snapshot)=>{
+
+const adminReports =
+
+document.getElementById(
+
+"adminReports"
+
+);
+
+adminReports.innerHTML = "";
+
+let total = 0;
+let found = 0;
+let missing = 0;
+
+snapshot.forEach((docSnap)=>{
+
+const data =
+docSnap.data();
+
+total++;
+
+if(data.type === "Found"){
+
+found++;
+
+}
+
+if(data.type === "Missing"){
+
+missing++;
+
+}
+
+// =========================================
+// SEARCH
+// =========================================
+
+const searchValue =
+
+document.getElementById(
+
+"adminSearch"
+
+)
+
+.value
+
+.toLowerCase();
+
+const matchesSearch =
+
+data.name
+?.toLowerCase()
+.includes(searchValue)
+
+||
+
+data.location
+?.toLowerCase()
+.includes(searchValue)
+
+||
+
+data.category
+?.toLowerCase()
+.includes(searchValue);
+
+if(!matchesSearch){
+
+return;
+
+}
+
+// =========================================
+// CARD
+// =========================================
+
+adminReports.innerHTML +=
+
+`
+
+<div class="report-card">
+
+<img src="${data.image}">
+
+<div class="category-badge">
+
+${data.category}
+
+</div>
+
+<h3>
+
+${data.name}
+
+</h3>
+
+<p>
+
+<b>Type:</b>
+${data.type}
+
+<br><br>
+
+<b>Location:</b>
+${data.location}
+
+<br><br>
+
+${data.description}
+
+</p>
+
+<br>
+
+<div
+style="
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+">
+
+<button
+class="btn btn-success"
+onclick="approveReport('${docSnap.id}')">
+
+Approve
+
+</button>
+
+<button
+class="btn btn-warning"
+onclick="flagReport('${docSnap.id}')">
+
+Flag
+
+</button>
+
+<button
+class="btn btn-danger"
+onclick="deleteReport('${docSnap.id}')">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+// =========================================
+// STATS
+// =========================================
+
+document.getElementById(
+
+"totalReports"
+
+).innerHTML = total;
+
+document.getElementById(
+
+"foundReports"
+
+).innerHTML = found;
+
+document.getElementById(
+
+"missingReports"
+
+).innerHTML = missing;
+
+document.getElementById(
+
+"totalUsers"
+
+).innerHTML =
+
+Math.floor(total * 1.7);
+
+// =========================================
+// CHART
+// =========================================
+
+const ctx =
+
+document.getElementById(
+
+'statsChart'
+
+);
+
+new Chart(ctx,{
+
+type:'bar',
+
+data:{
+
+labels:[
+
+'Missing',
+'Found',
+'Total'
+
+],
+
+datasets:[{
+
+label:'Reports',
+
+data:[
+
+missing,
+found,
+total
+
+],
+
+backgroundColor:[
+
+'#ef4444',
+'#22c55e',
+'#3b82f6'
+
+]
+
+}]
+
+}
+
+});
+
+}
+
+);
+
+}
+
+// =========================================
+// SEARCH EVENT
+// =========================================
+
+document.getElementById(
+
+"adminSearch"
+
+)
+
+.addEventListener(
+
+"input",
+
+loadReports
+
+);
+
+// =========================================
+// DELETE
+// =========================================
+
+window.deleteReport = async function(id){
+
+const confirmDelete = confirm(
+
+"Delete report?"
+
+);
+
+if(!confirmDelete){
+
+return;
+
+}
+
+try{
+
+await deleteDoc(
+
+doc(db,"reports",id)
+
+);
+
+// =========================================
+// LOG
+// =========================================
+
+await addDoc(
+
+collection(db,"auditLogs"),
+
+{
+
+action:"Deleted Report",
+
+reportId:id,
+
+timestamp:serverTimestamp()
+
+}
+
+);
+
+alert(
+
+"Report deleted"
+
+);
+
+loadLogs();
+
+}
+catch(error){
+
+alert(error.message);
+
+}
+
+};
+
+// =========================================
+// APPROVE
+// =========================================
+
+window.approveReport = async function(id){
+
+await addDoc(
+
+collection(db,"auditLogs"),
+
+{
+
+action:"Approved Report",
+
+reportId:id,
+
+timestamp:serverTimestamp()
+
+}
+
+);
+
+alert(
+
+"Report approved"
+
+);
+
+loadLogs();
+
+};
+
+// =========================================
+// FLAG
+// =========================================
+
+window.flagReport = async function(id){
+
+await addDoc(
+
+collection(db,"auditLogs"),
+
+{
+
+action:"Flagged Report",
+
+reportId:id,
+
+timestamp:serverTimestamp()
+
+}
+
+);
+
+alert(
+
+"Report flagged"
+
+);
+
+loadLogs();
+
+};
+
+// =========================================
+// LOAD LOGS
+// =========================================
+
+function loadLogs(){
+
+const q = query(
+
+collection(db,"auditLogs"),
+
+orderBy("timestamp","desc")
+
+);
+
+onSnapshot(
+
+q,
+
+(snapshot)=>{
+
+const auditLogs =
+
+document.getElementById(
+
+"auditLogs"
+
+);
+
+auditLogs.innerHTML = "";
+
+snapshot.forEach((docSnap)=>{
+
+const data =
+docSnap.data();
+
+auditLogs.innerHTML +=
+
+`
+
+<div
+style="
+padding:18px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+">
+
+<h3>
+
+${data.action}
+
+</h3>
+
+<p>
+
+Report ID:
+${data.reportId}
+
+</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+);
+
+}
+
+loadLogs();
+
+</script>
+
+</body>
+
+</html>
