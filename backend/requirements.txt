@@ -1,0 +1,10 @@
+fastapi==0.138.0
+uvicorn[standard]
+python-multipart
+pillow
+numpy
+insightface
+onnxruntime
+python-dotenv
+resend
+requests
