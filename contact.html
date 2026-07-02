@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+SafeReturn | Contact Us
+
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet">
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+background:
+
+radial-gradient(circle at top,
+#0b2d73 0%,
+#02102f 45%,
+#010814 100%);
+
+color:white;
+
+overflow-x:hidden;
+
+min-height:100vh;
+
+}
+
+/* ==========================
+BACKGROUND
+========================== */
+
+.glow{
+
+position:absolute;
+
+border-radius:50%;
+
+filter:blur(90px);
+
+animation:float 9s ease-in-out infinite;
+
+opacity:.4;
+
+}
+
+.glow1{
+
+width:320px;
+
+height:320px;
+
+background:#2563eb;
+
+top:-120px;
+
+left:-100px;
+
+}
+
+.glow2{
+
+width:280px;
+
+height:280px;
+
+background:#06b6d4;
+
+right:-80px;
+
+bottom:-80px;
+
+animation-delay:2s;
+
+}
+
+.glow3{
+
+width:220px;
+
+height:220px;
+
+background:#7c3aed;
+
+left:45%;
+
+bottom:20%;
+
+animation-delay:4s;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-40px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ==========================
+NAVBAR
+========================== */
+
+nav{
+
+width:100%;
+
+height:90px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 8%;
+
+backdrop-filter:blur(20px);
+
+background:
+
+rgba(255,255,255,.05);
+
+border-bottom:
+
+1px solid rgba(255,255,255,.08);
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+}
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+font-size:34px;
+
+font-weight:800;
+
+}
+
+.logo i{
+
+color:#ef4444;
+
+font-size:40px;
+
+}
+
+.logo span{
+
+color:#ef4444;
+
+}
+
+.back-btn{
+
+padding:14px 22px;
+
+border-radius:14px;
+
+text-decoration:none;
+
+font-weight:700;
+
+color:white;
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6);
+
+transition:.35s;
+
+}
+
+.back-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* ==========================
+HERO
+========================== */
+
+.hero{
+
+width:100%;
+
+padding:90px 8%;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+text-align:center;
+
+position:relative;
+
+z-index:5;
+
+}
+
+.hero h1{
+
+font-size:64px;
+
+font-weight:800;
+
+margin-bottom:20px;
+
+}
+
+.hero h1 span{
+
+color:#3b82f6;
+
+}
+
+.hero p{
+
+max-width:750px;
+
+line-height:1.8;
+
+font-size:18px;
+
+color:#d1d5db;
+
+margin-bottom:50px;
+
+}
+
+/* ==========================
+CONTACT CARDS
+========================== */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(3,1fr);
+
+gap:30px;
+
+width:100%;
+
+max-width:1200px;
+
+}
+
+.card{
+
+background:
+
+rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+padding:40px;
+
+border-radius:28px;
+
+text-align:center;
+
+transition:.35s;
+
+border:
+
+1px solid rgba(255,255,255,.08);
+
+}
+
+.card:hover{
+
+transform:
+
+translateY(-10px);
+
+box-shadow:
+
+0 20px 40px rgba(0,0,0,.35);
+
+}
+
+.card i{
+
+font-size:42px;
+
+margin-bottom:20px;
+
+color:#3b82f6;
+
+}
+
+.card h3{
+
+font-size:26px;
+
+margin-bottom:15px;
+
+}
+
+.card p{
+
+color:#d1d5db;
+
+line-height:1.7;
+
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+nav{
+
+padding:20px;
+
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
+
+<!-- ==========================
+NAVBAR
+========================== -->
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+<div>
+
+Safe<span>Return</span>
+
+</div>
+
+</div>
+
+<a href="index.html" class="back-btn">
+
+<i class="fa-solid fa-house"></i>
+
+Home
+
+</a>
+
+</nav>
+
+<!-- ==========================
+HERO
+========================== -->
+
+<section class="hero">
+
+<h1>
+
+Contact <span>SafeReturn</span>
+
+</h1>
+
+<p>
+
+Need help with a missing person report, found person report,
+passport recovery or technical support?
+
+Our team is here to help you 24 hours a day.
+
+</p>
+
+<div class="cards">
+
+<!-- EMAIL -->
+
+<div class="card">
+
+<i class="fa-solid fa-envelope"></i>
+
+<h3>
+
+Email
+
+</h3>
+
+<p>
+
+safe.return3808@gmail.com
+
+</p>
+
+
+
+</div>
+
+<!-- PHONE -->
+
+<div class="card">
+
+<i class="fa-solid fa-phone"></i>
+
+<h3>
+
+Phone
+
+</h3>
+
+<p>
+
++91 9911293139
+
+</p>
+
+<p>
+
+Mon - Sun
+
+24 Hours
+
+</p>
+
+</div>
+
+<!-- LOCATION -->
+
+<div class="card">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<h3>
+
+Office
+
+</h3>
+
+<p>
+
+Banglore 
+
+India
+
+</p>
+
+<p>
+
+Worldwide Support
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+CONTACT FORM
+========================== -->
+
+<section
+style="padding:60px 8%;">
+
+<div
+style="
+
+max-width:900px;
+
+margin:auto;
+
+background:
+
+rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+padding:45px;
+
+border-radius:30px;
+
+border:
+
+1px solid rgba(255,255,255,.08);
+
+">
+
+<h2
+style="
+
+text-align:center;
+
+margin-bottom:40px;
+
+font-size:42px;
+
+">
+
+Send us a Message
+
+</h2>
+
+<form id="contactForm">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+required
+
+style="
+
+width:100%;
+
+padding:18px;
+
+margin-bottom:20px;
+
+border:none;
+
+outline:none;
+
+border-radius:16px;
+
+background:
+
+rgba(255,255,255,.10);
+
+color:white;
+
+font-size:16px;
+
+">
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+required
+
+style="
+
+width:100%;
+
+padding:18px;
+
+margin-bottom:20px;
+
+border:none;
+
+outline:none;
+
+border-radius:16px;
+
+background:
+
+rgba(255,255,255,.10);
+
+color:white;
+
+font-size:16px;
+
+">
+
+<input
+type="text"
+id="subject"
+placeholder="Subject"
+
+style="
+
+width:100%;
+
+padding:18px;
+
+margin-bottom:20px;
+
+border:none;
+
+outline:none;
+
+border-radius:16px;
+
+background:
+
+rgba(255,255,255,.10);
+
+color:white;
+
+font-size:16px;
+
+">
+
+<textarea
+
+id="message"
+
+placeholder="Write your message..."
+
+rows="7"
+
+style="
+
+width:100%;
+
+padding:20px;
+
+border:none;
+
+outline:none;
+
+resize:none;
+
+border-radius:18px;
+
+background:
+
+rgba(255,255,255,.10);
+
+color:white;
+
+font-size:16px;
+
+margin-bottom:25px;
+
+"></textarea>
+
+<button
+
+id="sendBtn"
+
+style="
+
+width:100%;
+
+padding:18px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6);
+
+font-size:18px;
+
+font-weight:700;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+">
+
+🚀 Send Message
+
+</button>
+
+</form>
+
+<div
+id="status"
+
+style="
+
+margin-top:25px;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:700;
+
+">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+GOOGLE MAP
+========================== -->
+
+<section
+style="padding:0 8% 80px;">
+
+<iframe
+
+src="https://www.google.com/maps?q=New%20Delhi&output=embed"
+
+width="100%"
+
+height="420"
+
+style="
+
+border:none;
+
+border-radius:30px;
+
+"
+
+loading="lazy">
+
+</iframe>
+
+</section>
+
+<script type="module">
+
+const form = document.getElementById("contactForm");
+const status = document.getElementById("status");
+const sendBtn = document.getElementById("sendBtn");
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const payload = {
+
+        name: document.getElementById("name").value.trim(),
+
+        email: document.getElementById("email").value.trim(),
+
+        subject: document.getElementById("subject").value.trim(),
+
+        message: document.getElementById("message").value.trim()
+
+    };
+
+    if(
+        payload.name===""||
+        payload.email===""||
+        payload.message===""){
+        status.style.color="red";
+        status.innerHTML="❌ Please fill all required fields.";
+        return;
+    }
+
+    sendBtn.disabled=true;
+
+    sendBtn.innerHTML="⏳ Sending...";
+
+    try{
+
+        const response=await fetch(
+            "http://127.0.0.1:8000/contact",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(payload)
+            }
+        );
+
+        const result=await response.json();
+
+        if(result.success){
+
+            status.style.color="#22c55e";
+
+            status.innerHTML="✅ Message sent successfully!";
+
+            form.reset();
+
+        }else{
+
+            status.style.color="red";
+
+            status.innerHTML=result.error;
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+        status.style.color="red";
+
+        status.innerHTML="❌ Unable to connect to server.";
+
+    }
+
+    sendBtn.disabled=false;
+
+    sendBtn.innerHTML="🚀 Send Message";
+
+});
+
+</script>
+
+<!-- =========================================
+FAQ
+========================================= -->
+
+<section style="padding:0 8% 80px;max-width:1000px;margin:auto;">
+
+<h2 style="text-align:center;font-size:42px;margin-bottom:40px;">
+
+Frequently Asked Questions
+
+</h2>
+
+<div class="card" style="margin-bottom:20px;">
+
+<h3>How quickly will you reply?</h3>
+
+<p>
+
+Usually within 24 hours.
+
+</p>
+
+</div>
+
+<div class="card" style="margin-bottom:20px;">
+
+<h3>Can I report a missing person?</h3>
+
+<p>
+
+Yes. SafeReturn allows reporting missing and found persons as well as lost documents.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Is SafeReturn free?</h3>
+
+<p>
+
+Yes. Our mission is to help reunite families and recover important belongings.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- =========================================
+SOCIAL
+========================================= -->
+
+<section style="text-align:center;padding-bottom:60px;">
+
+<h2 style="margin-bottom:25px;">
+
+Follow Us
+
+</h2>
+
+<div style="display:flex;justify-content:center;gap:25px;font-size:32px;">
+
+<a href="#" style="color:white;"><i class="fab fa-facebook"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-instagram"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-x-twitter"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-linkedin"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-github"></i></a>
+
+</div>
+
+</section>
+
+<!-- =========================================
+FOOTER
+========================================= -->
+
+<footer style="padding:35px;text-align:center;background:rgba(255,255,255,.05);border-top:1px solid rgba(255,255,255,.08);">
+
+<h2 style="margin-bottom:10px;">
+
+Safe<span style="color:#ef4444;">Return</span>
+
+</h2>
+
+<p style="color:#d1d5db;line-height:1.8;">
+
+Helping reunite families, recover lost belongings, and make communities safer.
+
+</p>
+
+<br>
+
+<p style="color:#94a3b8;">
+
+© 2026 SafeReturn. All Rights Reserved.
+
+</p>
+
+</footer>
+
+</body>
+
+</html>

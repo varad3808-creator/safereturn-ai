@@ -1,961 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Found Person | SafeReturn</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,Helvetica,sans-serif; }
+    body { background: radial-gradient(circle at top,#0f3d2a 0%,#021c10 45%,#088d0f 100%); min-height:100vh; color:white; }
+    
+    /* PREMIUM NAVBAR */
+    nav { width:100%; height:105px; background:#01120a; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; padding:0 70px; }
+    .logo { display:flex; align-items:center; gap:15px; }
+    .logo i { color:#22c55e; font-size:42px; }
+    .logo h1 { font-size:58px; font-weight:900; }
+    .logo span { color:#22c55e; }
+    .nav-links { display:flex; align-items:center; gap:45px; }
+    .nav-links a { color:white; text-decoration:none; font-size:22px; font-weight:700; display:flex; align-items:center; gap:8px; }
+    .nav-links a.active { color:#22c55e; }
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+    /* WORKSPACE CONTENT */
+    .main { width:100%; display:flex; justify-content:center; padding:50px 20px; }
+    .card { width:100%; max-width:900px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.07); border-radius:35px; padding:50px; box-shadow: 0 0 50px rgba(0,0,0,0.5), 0 0 120px rgba(34,197,94,0.1); }
+    .card h2 { font-size:42px; font-weight:900; margin-bottom:10px; }
+    .card h2 span { color: #22c55e; }
+    .subtitle { font-size:18px; opacity:0.6; margin-bottom:40px; }
 
-<title>Report Found | SafeReturn</title>
+    /* GRID FORM */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
+    .full-width { grid-column: span 2; }
+    .form-group { display: flex; flex-direction: column; gap: 10px; text-align: left; }
+    .form-group label { font-size: 16px; font-weight: 700; color: #94a3b8; }
+    .form-control { width: 100%; height: 65px; background: #061f12; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 0 20px; color: white; font-size: 18px; outline: none; transition: 0.3s; }
+    .form-control:focus { border-color: #22c55e; box-shadow: 0 0 15px rgba(34,197,94,0.2); }
+    textarea.form-control { height: 140px; padding: 20px; resize: none; }
 
-<link
-rel="stylesheet"
-href="./style.css?v=9999">
+    /* HIGH-PERFORMANCE DROPZONE */
+    .upload-box { width:100%; height:320px; border:2px dashed rgba(255,255,255,0.2); border-radius:25px; overflow:hidden; position:relative; cursor:pointer; background:#061f12; display:flex; align-items:center; justify-content:center; transition: 0.3s; }
+    .upload-box:hover { border-color: #22c55e; background: #0a2e1b; }
+    .upload-box img { width:100%; height:100%; object-fit:contain; background: #01120a; }
+    .upload-placeholder { text-align:center; }
+    .upload-placeholder i { font-size:60px; color:#22c55e; margin-bottom:15px; }
+    .upload-placeholder h3 { font-size:24px; margin-bottom:8px; }
+    .upload-placeholder p { font-size:16px; opacity:0.6; }
 
-<link
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-rel="stylesheet">
+    /* SUBMIT BUTTON */
+    .submit-btn { width:100%; height:85px; border:none; border-radius:22px; background:linear-gradient(135deg,#16a34a,#22c55e); color:white; font-size:28px; font-weight:800; cursor:pointer; transition:0.3s; box-shadow: 0 4px 20px rgba(34,197,94,0.3); display:flex; align-items:center; justify-content:center; gap:12px; }
+    .submit-btn:hover { transform:scale(1.02); box-shadow: 0 6px 30px rgba(34,197,94,0.5); }
+    .submit-btn:disabled { background: #475569; cursor: not-allowed; transform: none; box-shadow: none; }
 
+    @media(max-width:900px){ 
+        .form-grid { grid-template-columns: 1fr; } 
+        .full-width { grid-column: span 1; } 
+        nav { padding: 0 20px; flex-direction: column; height: auto; padding-top: 20px; padding-bottom:20px; gap: 15px; } 
+        .card { padding: 25px; } 
+        .logo h1 { font-size:38px; }
+        .nav-links { gap:20px; }
+        .nav-links a { font-size:17px; }
+    }
+</style>
 </head>
-
 <body>
 
-<div class="glow1"></div>
-<div class="glow2"></div>
-<div class="glow3"></div>
-
 <nav>
-
-<div class="logo">
-
-<i class="fa-solid fa-shield-heart"></i>
-
-Safe<span>Return</span>
-
-</div>
-
-<div class="nav-links">
-
-<a href="./index.html" class="nav-item">
-
-<i class="fa-solid fa-house"></i>
-
-Home
-
-</a>
-
-<a href="./found.html" class="nav-item active-nav">
-
-<i class="fa-solid fa-circle-check"></i>
-
-Report Found
-
-</a>
-
-</div>
-
+    <div class="logo">
+        <i class="fa-solid fa-shield-heart"></i>
+        <h1>Safe <span>Return</span></h1>
+    </div>
+    <div class="nav-links">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="report.html"><i class="fa-solid fa-file-invoice"></i> Missing Report</a>
+        <a href="found.html" class="active"><i class="fa-solid fa-hand-holding-heart"></i> Found Report</a>
+        <a href="face-match.html"><i class="fa-solid fa-robot"></i> AI Face Match</a>
+    </div>
 </nav>
 
-<section class="report-page">
+<div class="main">
+    <div class="card">
+        <h2>File Found <span>Report</span></h2>
+        <p class="subtitle">Publish spotted or recovered individual details onto the system tracking grids instantly.</p>
 
-<div class="report-container">
+        <form id="foundReportForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name / Description Identifier</label>
+                    <input type="text" id="caseName" class="form-control" placeholder="e.g. Unknown (Child) or John Doe" required>
+                </div>
+                <div class="form-group">
+    <label>Gender</label>
 
-<div class="report-icon found-icon">
+    <select
+        id="gender"
+        class="form-control">
 
-<i class="fa-solid fa-circle-check"></i>
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+        <option>Unknown</option>
 
+    </select>
 </div>
 
-<h1>
+<div class="form-group">
+    <label>Estimated Age</label>
 
-Report Found Person
-
-</h1>
-
-<p>
-
-Submit details of found individuals or pets to help reconnect families faster.
-
-</p>
-
-<form id="foundForm">
-
-<div class="input-group">
-
-<label>Name / Identification</label>
-
-<div class="input-box">
-
-<i class="fa-regular fa-user"></i>
-
-<input
-type="text"
-id="name"
-placeholder="Enter found person's name"
-required>
-
+    <input
+        type="number"
+        id="age"
+        class="form-control"
+        placeholder="Age in years">
 </div>
+                <div class="form-group">
+                    <label>Sighting Location</label>
+                    <input type="text" id="caseLocation" class="form-control" placeholder="e.g. Central Park, NY" required>
+                </div>
+                <div class="form-group">
+                    <label>Area Pincode</label>
+                    <input type="text" id="casePincode" class="form-control" placeholder="10024" required>
+                </div>
+                <div class="form-group">
+                    <label>Emergency Contact</label>
+                    <input type="tel" id="caseContact" class="form-control" placeholder="+1 (555) 019-2834" required>
+                </div>
+                <div class="form-group full-width">
+                    <label>Detailed Status & Safety Identifiers</label>
+                    <textarea id="caseDescription" class="form-control" placeholder="Specify current condition, color of clothes worn, safe with security, etc..." required></textarea>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label>Profile Image Assets</label>
+                    <input type="file" id="imageFileInput" accept="image/*" hidden>
+                    <div class="upload-box" onclick="document.getElementById('imageFileInput').click()">
+                        <img id="imagePreview" style="display:none;">
+                        <div class="upload-placeholder" id="placeholderUI">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <h3>Select Master Image Profile</h3>
+                            <p>Clear, direct facial lighting is highly recommended</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <button type="submit" class="submit-btn" id="submissionTriggerBtn">
+                <i class="fa-solid fa-paper-plane"></i> Broadcast Safe Sighting Log
+            </button>
+        </form>
+    </div>
 </div>
-
-<div class="input-group">
-
-<label>Category</label>
-
-<div class="input-box">
-
-<i class="fa-solid fa-layer-group"></i>
-
-<select id="category">
-
-<option value="found">
-
-Found Person
-
-</option>
-
-<option value="elderly">
-
-Found Elderly
-
-</option>
-
-<option value="pet">
-
-Found Pet
-
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-<div class="input-group">
-
-<label>Found Location</label>
-
-<div class="input-box">
-
-<i class="fa-solid fa-location-dot"></i>
-
-<input
-type="text"
-id="location"
-placeholder="Enter found location"
-required>
-
-</div>
-
-</div>
-
-<div class="input-group">
-
-<label>Pincode</label>
-
-<div class="input-box">
-
-<i class="fa-solid fa-map-pin"></i>
-
-<input
-type="number"
-id="pincode"
-placeholder="Enter area pincode"
-required>
-
-</div>
-
-</div>
-
-<div class="input-group">
-
-<label>Emergency Contact</label>
-
-<div class="input-box">
-
-<i class="fa-solid fa-phone"></i>
-
-<input
-type="tel"
-id="contact"
-placeholder="Enter contact number"
-required>
-
-</div>
-
-</div>
-
-<div class="input-group">
-
-<label>Description</label>
-
-<div class="textarea-box">
-
-<textarea
-id="description"
-placeholder="Enter complete found details"
-required>
-
-</textarea>
-
-</div>
-
-</div>
-
-<div class="input-group">
-
-<label>Upload Image</label>
-
-<div class="upload-buttons">
-
-<label class="upload-btn">
-
-<i class="fa-solid fa-camera"></i>
-
-Take Photo
-
-<input
-type="file"
-id="cameraInput"
-accept="image/*"
-capture="environment"
-hidden>
-
-</label>
-
-<label class="upload-btn">
-
-<i class="fa-regular fa-image"></i>
-
-Choose File
-
-<input
-type="file"
-id="galleryInput"
-accept="image/*"
-hidden>
-
-</label>
-
-</div>
-
-</div>
-
-<img
-id="preview"
-class="image-preview">
-
-<button
-type="submit"
-class="submit-btn found-btn">
-
-Submit Found Report
-
-</button>
-
-</form>
-
-<div id="status"></div>
-
-<div id="resultBox"></div>
-
-</div>
-
-</section>
 
 <script type="module">
-
-import { db }
-from "./firebase.js?v=9999";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
 import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-collection,
-addDoc,
-serverTimestamp
+import {
+    getAuth
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
+        authDomain: "safereturn-f6632.firebaseapp.com",
+        projectId: "safereturn-f6632",
+        storageBucket: "safereturn-f6632.firebasestorage.app",
+        messagingSenderId: "753626237442",
+        appId: "1:753626237442:web:f197134274a596777cf51b",
+        measurementId: "G-9GDWF67F4R"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    const imageFileInput = document.getElementById("imageFileInput");
+    const imagePreview = document.getElementById("imagePreview");
+    const placeholderUI = document.getElementById("placeholderUI");
+    const reportForm = document.getElementById("foundReportForm");
+    const submitBtn = document.getElementById("submissionTriggerBtn");
+
+    let verifiedImageFile = null;
+    async function getBuffaloEmbedding(file){
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    const response = await fetch(
+        "http://127.0.0.1:8000/extract",
+        {
+            method:"POST",
+            body:formData
+        }
+    );
+
+    return await response.json();
 
 }
 
-from
+    imageFileInput.addEventListener("change", () => {
+        const file = imageFileInput.files[0];
+        if(file) {
+            verifiedImageFile = file;
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.style.display = "block";
+            placeholderUI.style.display = "none";
+        }
+    });
 
-"https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+    reportForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        if(!verifiedImageFile) {
+            alert("Please include a sighting photo asset for verification.");
+            return;
+        }
 
-const CLOUD_NAME =
-"dywa9bu7c";
+        submitBtn.disabled = true;
+        const buffaloFace =
+await getBuffaloEmbedding(
+    verifiedImageFile
+);
+if(!buffaloFace.success){
 
-const UPLOAD_PRESET =
-"safereturn_uploads";
-
-const preview =
-document.getElementById("preview");
-
-const cameraInput =
-document.getElementById("cameraInput");
-
-const galleryInput =
-document.getElementById("galleryInput");
-
-function previewImage(input){
-
-input.addEventListener(
-
-"change",
-
-(e)=>{
-
-const file =
-e.target.files[0];
-
-if(file){
-
-preview.src =
-URL.createObjectURL(file);
-
-preview.style.display =
-"block";
+    throw new Error(
+        "No face detected in uploaded image."
+    );
 
 }
+// ==========================
+// CHECK FOR DUPLICATE REPORTS
+// ==========================
 
-}
-
+const reportsSnapshot =
+await getDocs(
+    collection(db,"reports")
 );
 
-}
+let duplicate = null;
 
-previewImage(cameraInput);
-previewImage(galleryInput);
+let highestSimilarity = 0;
+for (const report of reportsSnapshot.docs) {
 
-document.getElementById(
+    const data = report.data();
 
-"foundForm"
+    if (!data.embedding)
+        continue;
 
-)
+    let dot = 0;
+    let normA = 0;
+    let normB = 0;
 
-.addEventListener(
+    for (let i = 0; i < buffaloFace.embedding.length; i++) {
 
-"submit",
+        dot +=
+            buffaloFace.embedding[i] *
+            data.embedding[i];
 
-async(e)=>{
+        normA +=
+            buffaloFace.embedding[i] *
+            buffaloFace.embedding[i];
 
-e.preventDefault();
+        normB +=
+            data.embedding[i] *
+            data.embedding[i];
 
-const status =
-document.getElementById("status");
+    }
 
-const resultBox =
-document.getElementById("resultBox");
+    const similarity =
+        dot /
+        (
+            Math.sqrt(normA) *
+            Math.sqrt(normB)
+        );
 
-status.innerHTML =
-"Uploading report...";
+    if (similarity > highestSimilarity) {
 
-const file =
+        highestSimilarity = similarity;
 
-cameraInput.files[0]
+        duplicate = data;
 
-||
-
-galleryInput.files[0];
-
-if(!file){
-
-status.innerHTML =
-"Please upload image";
-
-return;
-
-}
-
-try{
-
-const formData =
-new FormData();
-
-formData.append("file",file);
-
-formData.append(
-"upload_preset",
-UPLOAD_PRESET
-);
-
-const upload =
-await fetch(
-
-`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-
-{
-
-method:"POST",
-
-body:formData
+    }
 
 }
+if (highestSimilarity >= 0.95) {
 
-);
+    const proceed = confirm(
 
-const imageData =
-await upload.json();
+`⚠️ POSSIBLE DUPLICATE FOUND
 
-status.innerHTML =
-"🔍 AI scanning database...";
+Name : ${duplicate.name}
 
-const aiResponse =
-await fetch(
+Similarity :
+${(highestSimilarity*100).toFixed(1)}%
 
-"http://127.0.0.1:5000/match",
+Press OK to continue.
 
-{
+Press Cancel to stop.`
 
-method:"POST",
+    );
 
-headers:{
-"Content-Type":"application/json"
-},
+    if (!proceed) {
 
-body:JSON.stringify({
+        submitBtn.disabled = false;
 
-image:imageData.secure_url
+        submitBtn.innerHTML =
+        `<i class="fa-solid fa-paper-plane"></i> Submit`;
 
-})
+        return;
+
+    }
 
 }
 
-);
+if(!buffaloFace.success){
 
-const aiData =
-await aiResponse.json();
+    throw new Error(
+        "No face detected."
+    );
 
-resultBox.innerHTML = "";
+}
+        submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Uploading to Cloudinary Storage...`;
 
-if(aiData.matches.length > 0){
+        try {
+            // 1. Post to Cloudinary Serverless REST API
+            const cloudinaryPayload = new FormData();
+            cloudinaryPayload.append("file", verifiedImageFile);
+            cloudinaryPayload.append("upload_preset", "safe_return_upload");
 
-resultBox.innerHTML += `
+            const cloudinaryResponse = await fetch("https://api.cloudinary.com/v1_1/dtqvfvckj/image/upload", {
+                method: "POST",
+                body: cloudinaryPayload
+            });
 
-<h1 style="
-text-align:center;
-font-size:50px;
-margin-top:50px;
-margin-bottom:30px;
-color:#22c55e;
-">
+            const secureCloudinaryData = await cloudinaryResponse.json();
+            
+            if(!secureCloudinaryData.secure_url) {
+                throw new Error("Cloudinary file generation dropped.");
+            }
 
-Possible Matches Found
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Writing Record into Firestore Matrix...`;
+const user = auth.currentUser;
 
-</h1>
+if (!user) {
 
-`;
+    alert("Please login first.");
 
-aiData.matches.forEach(match=>{
+    return;
 
-resultBox.innerHTML += `
+}
+            // 2. Commit Document cleanly into Firestore "reports" collection as 'found'
+await addDoc(collection(db, "reports"), {
 
-<div class="match-card">
+    // ==========================
+    // USER OWNERSHIP
+    // ==========================
 
-<img src="${match.image}">
+    createdBy: user.uid,
 
-<div class="match-info">
+    createdByName: user.displayName || "",
 
-<div class="match-badge">
+    createdByEmail: user.email,
 
-🧒 Missing Match
+    createdAt: new Date(),
 
-</div>
+    status: "Active",
 
-<h2>${match.name}</h2>
+    // ==========================
+    // REPORT DATA
+    // ==========================
 
-<p>
-<strong>Location:</strong>
-${match.location}
-</p>
+    name: document.getElementById("caseName").value,
 
-<p>
-<strong>Pincode:</strong>
-${match.pincode}
-</p>
+    gender: document.getElementById("gender").value,
 
-<p>
-<strong>Contact:</strong>
-${match.contact}
-</p>
+    estimatedAge: parseInt(
+        document.getElementById("age").value
+    ) || null,
 
-<p>
-${match.description}
-</p>
+    location: document.getElementById("caseLocation").value,
 
-</div>
+    pincode: document.getElementById("casePincode").value,
 
-</div>
+    contact: document.getElementById("caseContact").value,
 
-`;
+    reward: parseInt(
+        document.getElementById("caseReward").value
+    ) || 0,
+
+    description: document.getElementById("caseDescription").value,
+
+    imageUrl: secureCloudinaryData.secure_url,
+
+    embedding: buffaloFace.embedding,
+
+type: "found",
+
+category: "found",
+
+    timestamp: new Date().toISOString()
 
 });
 
-}else{
+            alert("Goated! Sighting listed into Firestore and image secured on Cloudinary.");
+            reportForm.reset();
+            imagePreview.style.display = "none";
+            placeholderUI.style.display = "block";
+            verifiedImageFile = null;
 
-resultBox.innerHTML = `
-
-<div style="
-text-align:center;
-font-size:40px;
-font-weight:bold;
-color:red;
-margin-top:40px;
-">
-
-No Matches Found
-
-</div>
-
-`;
-
-}
-
-await addDoc(
-
-collection(db,"reports"),
-
-{
-
-name:
-document.getElementById("name").value,
-
-category:
-document.getElementById("category").value,
-
-location:
-document.getElementById("location").value,
-
-pincode:
-document.getElementById("pincode").value,
-
-contact:
-document.getElementById("contact").value,
-
-description:
-document.getElementById("description").value,
-
-image:
-imageData.secure_url,
-
-type:"Found",
-
-status:"active",
-
-createdAt:
-serverTimestamp()
-
-}
-
-);
-
-status.innerHTML =
-"✅ Found report submitted";
-
-document.getElementById("foundForm").reset();
-
-preview.style.display =
-"none";
-
-}
-catch(error){
-
-console.log(error);
-
-status.innerHTML =
-"❌ Upload failed";
-
-}
-
-}
-
-);
-
+        } catch (err) {
+            console.error(err);
+            alert("Pipeline Delivery Error: " + err.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Broadcast Safe Sighting Log`;
+        }
+    });
 </script>
 
-<style>
-
-.report-page{
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:140px 20px 80px;
-
-}
-
-.report-container{
-
-width:100%;
-max-width:560px;
-
-padding:55px;
-
-border-radius:38px;
-
-background:
-rgba(3,7,18,0.78);
-
-backdrop-filter:blur(20px);
-
-border:
-1px solid rgba(59,130,246,0.12);
-
-box-shadow:
-0 0 80px rgba(37,99,235,0.15);
-
-}
-
-.report-icon{
-
-width:120px;
-height:120px;
-
-margin:auto auto 30px;
-
-border-radius:35px;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-font-size:55px;
-
-background:
-linear-gradient(
-135deg,
-#2563eb,
-#3b82f6
-);
-
-box-shadow:
-0 0 45px rgba(37,99,235,0.45);
-
-}
-
-.found-icon{
-
-background:
-linear-gradient(
-135deg,
-#22c55e,
-#16a34a
-);
-
-box-shadow:
-0 0 45px rgba(34,197,94,0.45);
-
-}
-
-.report-container h1{
-
-font-size:76px;
-
-line-height:0.95;
-
-font-weight:900;
-
-text-align:center;
-
-margin-bottom:20px;
-
-}
-
-.report-container p{
-
-text-align:center;
-
-font-size:20px;
-
-line-height:1.7;
-
-color:#cbd5e1;
-
-margin-bottom:45px;
-
-}
-
-.input-group{
-
-margin-bottom:26px;
-
-}
-
-.input-group label{
-
-display:block;
-
-margin-bottom:12px;
-
-font-weight:700;
-
-}
-
-.input-box{
-
-height:74px;
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-padding:0 22px;
-
-border-radius:24px;
-
-background:
-rgba(255,255,255,0.04);
-
-border:
-1px solid rgba(255,255,255,0.06);
-
-}
-
-.input-box i{
-
-font-size:20px;
-
-color:#86efac;
-
-}
-
-.input-box input,
-.input-box select{
-
-width:100%;
-height:100%;
-
-background:none;
-
-border:none;
-
-outline:none;
-
-font-size:18px;
-
-color:white;
-
-}
-
-.textarea-box{
-
-background:
-rgba(255,255,255,0.04);
-
-border:
-1px solid rgba(255,255,255,0.06);
-
-border-radius:24px;
-
-padding:20px;
-
-}
-
-.textarea-box textarea{
-
-width:100%;
-
-height:150px;
-
-background:none;
-
-border:none;
-
-outline:none;
-
-resize:none;
-
-font-size:17px;
-
-color:white;
-
-font-family:inherit;
-
-}
-
-.upload-buttons{
-
-display:flex;
-
-gap:18px;
-
-}
-
-.upload-btn{
-
-flex:1;
-
-height:72px;
-
-border-radius:22px;
-
-background:
-rgba(255,255,255,0.05);
-
-border:
-1px solid rgba(255,255,255,0.08);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-gap:12px;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:0.3s;
-
-}
-
-.image-preview{
-
-width:100%;
-
-height:340px;
-
-object-fit:cover;
-
-border-radius:28px;
-
-margin-top:25px;
-
-margin-bottom:25px;
-
-display:none;
-
-border:
-2px solid rgba(34,197,94,0.25);
-
-}
-
-.submit-btn{
-
-width:100%;
-
-height:78px;
-
-border:none;
-
-border-radius:26px;
-
-font-size:22px;
-
-font-weight:800;
-
-color:white;
-
-cursor:pointer;
-
-transition:0.3s;
-
-}
-
-.found-btn{
-
-background:
-linear-gradient(
-135deg,
-#22c55e,
-#16a34a
-);
-
-}
-
-#status{
-
-margin-top:28px;
-
-text-align:center;
-
-font-weight:700;
-
-font-size:18px;
-
-}
-
-#resultBox{
-
-margin-top:50px;
-
-}
-
-.match-card{
-
-background:#08153f;
-
-border-radius:25px;
-
-overflow:hidden;
-
-margin-bottom:40px;
-
-border:2px solid #22c55e;
-
-}
-
-.match-card img{
-
-width:100%;
-
-height:340px;
-
-object-fit:cover;
-
-}
-
-.match-info{
-
-padding:30px;
-
-}
-
-.match-badge{
-
-display:inline-block;
-
-padding:10px 20px;
-
-border-radius:30px;
-
-background:#16a34a;
-
-margin-bottom:20px;
-
-font-weight:bold;
-
-}
-
-.match-info h2{
-
-font-size:42px;
-
-margin-bottom:20px;
-
-}
-
-.match-info p{
-
-font-size:22px;
-
-margin-bottom:15px;
-
-}
-
-</style>
-
 </body>
-
 </html>

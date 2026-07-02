@@ -339,6 +339,16 @@ email,
 password
 
 );
+const user = auth.currentUser;
+
+localStorage.setItem(
+    "currentUser",
+    JSON.stringify({
+        uid: user.uid,
+        name: user.displayName,
+        email: user.email
+    })
+);
 
 // =========================================
 // PROFILE

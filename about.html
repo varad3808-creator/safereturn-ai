@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+SafeReturn | About Us
+
+</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet">
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+background:
+
+radial-gradient(circle at top,
+#0b2d73 0%,
+#02102f 45%,
+#010814 100%);
+
+color:white;
+
+overflow-x:hidden;
+
+}
+
+/* ==========================
+BACKGROUND
+========================== */
+
+.glow{
+
+position:absolute;
+
+border-radius:50%;
+
+filter:blur(90px);
+
+opacity:.35;
+
+animation:float 10s ease-in-out infinite;
+
+}
+
+.glow1{
+
+width:320px;
+
+height:320px;
+
+background:#2563eb;
+
+left:-120px;
+
+top:-120px;
+
+}
+
+.glow2{
+
+width:280px;
+
+height:280px;
+
+background:#06b6d4;
+
+right:-90px;
+
+bottom:-80px;
+
+animation-delay:3s;
+
+}
+
+.glow3{
+
+width:240px;
+
+height:240px;
+
+background:#7c3aed;
+
+left:45%;
+
+bottom:20%;
+
+animation-delay:6s;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-35px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ==========================
+NAVBAR
+========================== */
+
+nav{
+
+height:90px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 8%;
+
+background:
+
+rgba(255,255,255,.05);
+
+backdrop-filter:blur(20px);
+
+border-bottom:
+
+1px solid rgba(255,255,255,.08);
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+}
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+font-size:34px;
+
+font-weight:800;
+
+}
+
+.logo i{
+
+color:#ef4444;
+
+font-size:40px;
+
+}
+
+.logo span{
+
+color:#ef4444;
+
+}
+
+.home-btn{
+
+padding:14px 24px;
+
+border-radius:15px;
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6);
+
+text-decoration:none;
+
+font-weight:700;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.home-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* ==========================
+HERO
+========================== */
+
+.hero{
+
+padding:100px 8%;
+
+text-align:center;
+
+position:relative;
+
+z-index:5;
+
+}
+
+.hero h1{
+
+font-size:68px;
+
+margin-bottom:25px;
+
+font-weight:800;
+
+}
+
+.hero span{
+
+color:#3b82f6;
+
+}
+
+.hero p{
+
+max-width:850px;
+
+margin:auto;
+
+font-size:19px;
+
+line-height:1.9;
+
+color:#d1d5db;
+
+}
+
+/* ==========================
+MISSION CARDS
+========================== */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(3,1fr);
+
+gap:30px;
+
+padding:80px 8%;
+
+}
+
+.card{
+
+background:
+
+rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+border:
+
+1px solid rgba(255,255,255,.08);
+
+border-radius:28px;
+
+padding:40px;
+
+text-align:center;
+
+transition:.35s;
+
+}
+
+.card:hover{
+
+transform:
+
+translateY(-10px);
+
+box-shadow:
+
+0 20px 45px rgba(0,0,0,.35);
+
+}
+
+.card i{
+
+font-size:48px;
+
+color:#3b82f6;
+
+margin-bottom:20px;
+
+}
+
+.card h2{
+
+margin-bottom:15px;
+
+}
+
+.card p{
+
+line-height:1.8;
+
+color:#d1d5db;
+
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+.hero h1{
+
+font-size:44px;
+
+}
+
+nav{
+
+padding:20px;
+
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
+
+<!-- ==========================
+NAVBAR
+========================== -->
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+<div>
+
+Safe<span>Return</span>
+
+</div>
+
+</div>
+
+<a href="index.html" class="home-btn">
+
+<i class="fa-solid fa-house"></i>
+
+ Home
+
+</a>
+
+</nav>
+
+<!-- ==========================
+HERO
+========================== -->
+
+<section class="hero">
+
+<h1>
+
+About <span>SafeReturn</span>
+
+</h1>
+
+<p>
+
+SafeReturn is a community-driven platform designed to help reunite missing people with their families and help recover lost documents and belongings. Our goal is to make reporting, searching, and sharing information simple, fast, and accessible to everyone.
+
+</p>
+
+</section>
+
+<!-- ==========================
+MISSION
+========================== -->
+
+<section class="cards">
+
+<div class="card">
+
+<i class="fa-solid fa-bullseye"></i>
+
+<h2>
+
+Our Mission
+
+</h2>
+
+<p>
+
+To build the world's most trusted platform for reuniting families, recovering lost belongings, and making communities safer through technology.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-eye"></i>
+
+<h2>
+
+Our Vision
+
+</h2>
+
+<p>
+
+A future where no missing person goes unnoticed and every lost document or belonging has the highest chance of finding its rightful owner.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-heart"></i>
+
+<h2>
+
+Our Values
+
+</h2>
+
+<p>
+
+Compassion, trust, transparency, privacy, and innovation guide everything we build for the SafeReturn community.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+STATISTICS
+========================== -->
+
+<section
+style="padding:30px 8% 80px;">
+
+<h2
+style="text-align:center;font-size:46px;margin-bottom:50px;">
+
+SafeReturn Goals
+
+</h2>
+
+<div
+style="display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;">
+
+<div class="card">
+
+<h1
+style="font-size:54px;color:#3b82f6;">
+
+24/7
+
+</h1>
+
+<p>
+
+Platform Availability
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1
+style="font-size:54px;color:#3b82f6;">
+
+100%
+
+</h1>
+
+<p>
+
+Privacy Focused
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1
+style="font-size:54px;color:#3b82f6;">
+
+Global
+
+</h1>
+
+<p>
+
+Accessible Worldwide
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1
+style="font-size:54px;color:#3b82f6;">
+
+AI
+
+</h1>
+
+<p>
+
+Face Matching Technology
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+WHY SAFERETURN
+========================== -->
+
+<section
+style="padding:0 8% 90px;">
+
+<div class="card">
+
+<h2
+style="margin-bottom:25px;">
+
+Why SafeReturn?
+
+</h2>
+
+<p
+style="font-size:17px;line-height:2;">
+
+Every year, countless people go missing and thousands of valuable documents and belongings are lost. Existing solutions are often fragmented, slow, or difficult to use.
+
+SafeReturn brings everything together in one secure platform, allowing users to report missing persons, report found persons, search for lost documents, use AI-powered face matching, and connect communities through a single easy-to-use system.
+
+Our mission is simple:
+
+<strong style="color:#60a5fa;">
+
+Helping people find what matters most.
+
+</strong>
+
+</p>
+
+</div>
+
+</section>
+
+<script>
+    // ================================
+// SIMPLE FADE ANIMATION
+// ================================
+
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity="1";
+entry.target.style.transform="translateY(0)";
+
+}
+
+});
+
+});
+
+cards.forEach(card=>{
+
+card.style.opacity="0";
+card.style.transform="translateY(60px)";
+card.style.transition=".8s";
+
+observer.observe(card);
+
+});
+
+</script>
+
+<!-- =====================================
+FOUNDER
+===================================== -->
+
+<section style="padding:40px 8% 90px;">
+
+<h2
+style="
+text-align:center;
+font-size:46px;
+margin-bottom:50px;
+">
+
+Meet the Founder
+
+</h2>
+
+<div class="card">
+
+<i
+class="fa-solid fa-user-astronaut"
+style="
+font-size:70px;
+margin-bottom:20px;
+color:#3b82f6;
+"></i>
+
+<h2>
+
+Varishtha Bajpai
+
+</h2>
+
+<p
+style="
+font-size:18px;
+color:#60a5fa;
+margin-bottom:25px;
+">
+
+Founder & Developer of SafeReturn
+
+</p>
+
+<p
+style="
+line-height:2;
+font-size:17px;
+">
+
+Hello! My name is <strong>Varishtha Bajpai</strong>, and I am a 12-year-old developer from India.
+
+I created <strong>SafeReturn</strong> with one simple goal: to use technology to help reunite missing people with their families and help people recover lost documents and belongings.
+
+I enjoy learning programming, artificial intelligence, and web development, and I believe technology should be used to solve real-world problems that make a positive impact on people's lives.
+
+SafeReturn is a project I continue to build and improve every day, with future plans including AI-powered face matching, multilingual support, and global accessibility.
+
+Thank you for visiting SafeReturn and supporting this journey.
+
+</p>
+
+</div>
+
+</section>
+<section
+style="padding:0 8% 80px;">
+
+<div
+style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+">
+
+<div class="card">
+
+<h1 style="color:#3b82f6;">12</h1>
+
+<p>Years Old</p>
+
+</div>
+
+<div class="card">
+
+<h1 style="color:#3b82f6;">1</h1>
+
+<p>Founder</p>
+
+</div>
+
+<div class="card">
+
+<h1 style="color:#3b82f6;">AI</h1>
+
+<p>Learning & Building</p>
+
+</div>
+
+<div class="card">
+
+<h1 style="color:#3b82f6;">∞</h1>
+
+<p>Dreams & Ideas</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+TIMELINE
+===================================== -->
+
+<section
+style="padding:20px 8% 90px;">
+
+<h2
+style="
+text-align:center;
+font-size:46px;
+margin-bottom:50px;
+">
+
+Our Journey
+
+</h2>
+
+<div class="card" style="margin-bottom:25px;">
+
+<h3>🚀 Idea</h3>
+
+<p>
+
+The concept of SafeReturn was born from the desire to create a single platform for missing people and lost document recovery.
+
+</p>
+
+</div>
+
+<div class="card" style="margin-bottom:25px;">
+
+<h3>💻 Development</h3>
+
+<p>
+
+Building a modern platform with Firebase, AI face matching, secure authentication, and responsive design.
+
+</p>
+
+</div>
+
+<div class="card" style="margin-bottom:25px;">
+
+<h3>🤖 Artificial Intelligence</h3>
+
+<p>
+
+Integrating Buffalo AI face recognition to improve the accuracy of finding missing persons.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🌍 Future</h3>
+
+<p>
+
+Expanding globally with multilingual support, NGO partnerships, police collaboration, and faster AI search capabilities.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- =====================================
+ROADMAP
+===================================== -->
+
+<section
+style="padding:20px 8% 90px;">
+
+<div class="card">
+
+<h2
+style="margin-bottom:25px;">
+
+Future Roadmap
+
+</h2>
+
+<ul
+style="
+line-height:2.2;
+padding-left:20px;
+color:#d1d5db;
+font-size:17px;
+">
+
+<li>✅ AI Face Matching</li>
+
+<li>✅ Lost Document Recovery</li>
+
+<li>✅ Missing & Found Person Reporting</li>
+
+<li>🚀 Mobile Application</li>
+
+<li>🌍 Global Community Support</li>
+
+<li>🤝 NGO & Police Collaboration</li>
+
+<li>🧠 Smarter AI Search</li>
+
+<li>📢 Emergency Alert System</li>
+
+</ul>
+
+</div>
+
+</section>
+
+<!-- =====================================
+FOOTER
+===================================== -->
+
+<footer
+style="
+padding:40px;
+text-align:center;
+background:rgba(255,255,255,.05);
+border-top:1px solid rgba(255,255,255,.08);
+">
+
+<h2>
+
+Safe<span style="color:#ef4444;">
+
+Return
+
+</span>
+
+</h2>
+
+<p
+style="
+margin-top:15px;
+color:#d1d5db;
+line-height:1.8;
+">
+
+Helping families reunite, recovering lost belongings, and creating safer communities through technology.
+
+</p>
+
+<div
+style="
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:30px;
+font-size:28px;
+">
+
+<a href="#" style="color:white;"><i class="fab fa-facebook"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-instagram"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-x-twitter"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-linkedin"></i></a>
+
+<a href="#" style="color:white;"><i class="fab fa-github"></i></a>
+
+</div>
+
+<p
+style="
+margin-top:30px;
+color:#94a3b8;
+">
+
+© 2026 SafeReturn. All Rights Reserved.
+
+</p>
+
+</footer>
+
+</body>
+
+</html>

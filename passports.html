@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Passport Registry | SafeReturn</title>
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(
+circle at top,
+#0b2d73 0%,
+#02102f 45%,
+#010814 100%
+);
+
+min-height:100vh;
+
+padding:40px;
+
+color:white;
+
+}
+
+/* TITLE */
+
+h1{
+
+font-size:56px;
+font-weight:900;
+
+margin-bottom:35px;
+
+text-align:center;
+
+}
+
+/* SEARCH CONTROLS */
+
+.top-controls{
+
+display:flex;
+
+gap:20px;
+
+margin-bottom:45px;
+
+flex-wrap:wrap;
+
+}
+
+.search-box{
+
+flex:2;
+
+position:relative;
+
+}
+
+.search-box i{
+
+position:absolute;
+
+left:20px;
+top:22px;
+
+color:#94a3b8;
+
+font-size:18px;
+
+}
+
+.search-box input{
+
+width:100%;
+height:65px;
+
+background:#07152f;
+
+border:
+1px solid rgba(255,255,255,0.1);
+
+border-radius:18px;
+
+padding-left:55px;
+padding-right:20px;
+
+color:white;
+
+font-size:17px;
+
+outline:none;
+
+}
+
+.search-box input:focus{
+
+border-color:#3b82f6;
+
+}
+
+#filterSelect{
+
+flex:1;
+
+height:65px;
+
+background:#07152f;
+
+border:
+1px solid rgba(255,255,255,0.1);
+
+border-radius:18px;
+
+padding:0 20px;
+
+color:white;
+
+font-size:17px;
+
+outline:none;
+
+cursor:pointer;
+
+}
+
+/* GRID */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,minmax(340px,1fr));
+
+gap:30px;
+
+}
+
+/* CARD */
+
+.card{
+
+background:
+rgba(7,21,47,0.55);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+border-radius:28px;
+
+overflow:hidden;
+
+box-shadow:
+0 20px 40px rgba(0,0,0,0.35);
+
+transition:0.25s ease;
+
+}
+
+.card:hover{
+
+transform:
+translateY(-5px);
+
+}
+
+.card img{
+
+width:100%;
+height:250px;
+
+object-fit:cover;
+
+background:#020b23;
+
+}
+
+.card-content{
+
+padding:24px;
+
+}
+
+/* BADGE */
+
+.badge{
+
+padding:8px 14px;
+
+border-radius:10px;
+
+font-size:12px;
+
+font-weight:800;
+
+display:inline-block;
+
+margin-bottom:16px;
+
+letter-spacing:0.5px;
+
+}
+
+.lost{
+
+background:#dc2626;
+
+color:white;
+
+}
+
+.found{
+
+background:#16a34a;
+
+color:white;
+
+}
+.reward-badge{
+
+display:inline-block;
+
+margin-bottom:16px;
+
+padding:10px 16px;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+135deg,
+#fbbf24,
+#f59e0b
+);
+
+color:#000;
+
+font-weight:900;
+
+font-size:14px;
+
+box-shadow:
+0 0 20px rgba(251,191,36,.4);
+
+}
+
+/* TEXT */
+
+.card h2{
+
+font-size:24px;
+
+margin-bottom:12px;
+
+font-weight:900;
+
+}
+
+.card p{
+
+line-height:1.8;
+
+color:#cbd5e1;
+
+font-size:15px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+body{
+
+padding:20px;
+
+}
+
+.top-controls{
+
+flex-direction:column;
+
+}
+
+h1{
+
+font-size:38px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+
+🛂 Passport Registry
+
+</h1>
+
+<!-- SEARCH + FILTER -->
+
+<div class="top-controls">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search passport holder or location...">
+
+</div>
+
+<select id="filterSelect">
+
+<option value="all">
+All Passports
+</option>
+
+<option value="lost">
+🚨 Lost Passports
+</option>
+
+<option value="found">
+✅ Found Passports
+</option>
+
+</select>
+
+</div>
+
+<!-- GRID -->
+
+<div class="grid" id="passportGrid"></div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+
+getFirestore,
+collection,
+query,
+onSnapshot
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
+
+authDomain:
+"safereturn-f6632.firebaseapp.com",
+
+projectId:
+"safereturn-f6632"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* ELEMENTS */
+
+const passportGrid =
+document.getElementById("passportGrid");
+
+const searchInput =
+document.getElementById("searchInput");
+
+const filterSelect =
+document.getElementById("filterSelect");
+
+let allReports = [];
+
+/* RENDER */
+
+function renderPassports(){
+
+passportGrid.innerHTML = "";
+
+const search =
+searchInput.value.toLowerCase().trim();
+
+const filter =
+filterSelect.value;
+
+let shown = 0;
+
+allReports.forEach((data)=>{
+
+const type =
+(data.type || "")
+.toLowerCase()
+.trim();
+
+if(
+
+type !== "lost-passport"
+
+&&
+
+type !== "found-passport"
+
+){
+
+return;
+
+}
+
+const name =
+(data.name || "")
+.toLowerCase();
+
+const location =
+(data.location || "")
+.toLowerCase();
+
+if(
+
+search
+
+&&
+
+!name.includes(search)
+
+&&
+
+!location.includes(search)
+
+){
+
+return;
+
+}
+
+if(
+
+filter === "lost"
+
+&&
+
+type !== "lost-passport"
+
+){
+
+return;
+
+}
+
+if(
+
+filter === "found"
+
+&&
+
+type !== "found-passport"
+
+){
+
+return;
+
+}
+
+shown++;
+
+const lost =
+type === "lost-passport";
+const reward =
+data.reward || 0;
+
+passportGrid.innerHTML += `
+
+<div class="card">
+
+<img
+src="${data.imageUrl || 'https://via.placeholder.com/500'}">
+
+<div class="card-content">
+
+<div class="badge ${lost ? 'lost':'found'}">
+
+${lost
+? '🚨 LOST PASSPORT'
+: '✅ FOUND PASSPORT'}
+
+</div>
+
+<h2>${data.name}</h2>
+
+${reward > 0 ? `
+
+<div class="reward-badge">
+
+💰 REWARD ₹${reward.toLocaleString()}
+
+</div>
+
+` : ''}
+
+<p>
+
+<b>Location:</b>
+${data.location}
+
+<br><br>
+
+<b>Contact:</b>
+${data.contact}
+
+<br><br>
+
+${data.description}
+
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(shown === 0){
+
+passportGrid.innerHTML = `
+
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:60px;
+">
+
+<h2>
+No Passport Reports Found
+</h2>
+
+</div>
+
+`;
+
+}
+
+}
+
+/* FIRESTORE */
+
+onSnapshot(
+query(collection(db,"reports")),
+(snapshot)=>{
+
+allReports = [];
+
+snapshot.forEach((doc)=>{
+
+allReports.push(doc.data());
+
+});
+
+renderPassports();
+
+});
+
+/* EVENTS */
+
+searchInput.addEventListener(
+"input",
+renderPassports
+);
+
+filterSelect.addEventListener(
+"change",
+renderPassports
+);
+
+</script>
+
+
+</body>
+
+</html>

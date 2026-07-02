@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Report Lost Passport | SafeReturn</title>
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(
+circle at top,
+#4a1d06 0%,
+#1b0a02 45%,
+#090401 100%
+);
+
+min-height:100vh;
+
+color:white;
+
+}
+
+nav{
+
+width:100%;
+height:105px;
+
+background:#120701;
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:0 70px;
+
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+}
+
+.logo i{
+
+color:#fb923c;
+
+font-size:42px;
+
+}
+
+.logo h1{
+
+font-size:58px;
+font-weight:900;
+
+}
+
+.logo span{
+
+color:#fb923c;
+
+}
+
+.nav-links{
+
+display:flex;
+align-items:center;
+gap:45px;
+
+}
+
+.nav-links a{
+
+color:white;
+
+text-decoration:none;
+
+font-size:22px;
+font-weight:700;
+
+display:flex;
+align-items:center;
+gap:8px;
+
+}
+
+.nav-links a.active{
+
+color:#fb923c;
+
+}
+
+.main{
+
+width:100%;
+
+display:flex;
+justify-content:center;
+
+padding:50px 20px;
+
+}
+
+.card{
+
+width:100%;
+max-width:900px;
+
+background:
+rgba(0,0,0,0.35);
+
+border:
+1px solid rgba(255,255,255,0.07);
+
+border-radius:35px;
+
+padding:50px;
+
+}
+
+.card h2{
+
+font-size:42px;
+font-weight:900;
+
+margin-bottom:10px;
+
+}
+
+.card h2 span{
+
+color:#fb923c;
+
+}
+
+.subtitle{
+
+font-size:18px;
+
+opacity:0.7;
+
+margin-bottom:40px;
+
+}
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:25px;
+
+margin-bottom:30px;
+
+}
+
+.full-width{
+
+grid-column:span 2;
+
+}
+
+.form-group{
+
+display:flex;
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.form-group label{
+
+font-size:16px;
+font-weight:700;
+
+color:#cbd5e1;
+
+}
+
+.form-control{
+
+width:100%;
+height:65px;
+
+background:#1c0d04;
+
+border:
+1px solid rgba(255,255,255,0.1);
+
+border-radius:16px;
+
+padding:0 20px;
+
+color:white;
+
+font-size:18px;
+
+outline:none;
+
+}
+
+textarea.form-control{
+
+height:140px;
+
+padding:20px;
+
+resize:none;
+
+}
+
+.upload-box{
+
+width:100%;
+height:320px;
+
+border:
+2px dashed rgba(255,255,255,0.2);
+
+border-radius:25px;
+
+overflow:hidden;
+
+position:relative;
+
+cursor:pointer;
+
+background:#1c0d04;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+.upload-box img{
+
+width:100%;
+height:100%;
+
+object-fit:contain;
+
+}
+
+.upload-placeholder{
+
+text-align:center;
+
+}
+
+.upload-placeholder i{
+
+font-size:60px;
+
+color:#fb923c;
+
+margin-bottom:15px;
+
+}
+
+.submit-btn{
+
+width:100%;
+height:85px;
+
+border:none;
+
+border-radius:22px;
+
+background:
+linear-gradient(
+135deg,
+#ea580c,
+#fb923c
+);
+
+color:white;
+
+font-size:28px;
+font-weight:800;
+
+cursor:pointer;
+
+}
+
+@media(max-width:900px){
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.full-width{
+
+grid-column:span 1;
+
+}
+
+nav{
+
+padding:20px;
+
+flex-direction:column;
+
+height:auto;
+
+gap:15px;
+
+}
+
+.logo h1{
+
+font-size:38px;
+
+}
+
+.nav-links{
+
+gap:20px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.nav-links a{
+
+font-size:17px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-passport"></i>
+
+<h1>
+Safe <span>Return</span>
+</h1>
+
+</div>
+
+<div class="nav-links">
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
+
+<a href="LOST-PASSPORT.HTML" class="active">
+<i class="fa-solid fa-passport"></i>
+Lost Passport
+</a>
+
+<a href="FOUND-PASSPORT.HTML">
+<i class="fa-solid fa-id-card"></i>
+Found Passport
+</a>
+
+</div>
+
+</nav>
+
+<div class="main">
+
+<div class="card">
+
+<h2>
+
+File Lost <span>Passport</span>
+
+</h2>
+
+<p class="subtitle">
+
+Publish lost passport records into the recovery registry instantly.
+
+</p>
+
+<form id="passportForm">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Passport Holder Name</label>
+
+<input
+type="text"
+id="caseName"
+class="form-control"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Lost Location</label>
+
+<input
+type="text"
+id="caseLocation"
+class="form-control"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Passport Number</label>
+
+<input
+type="text"
+id="casePincode"
+class="form-control"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Emergency Contact</label>
+
+<input
+type="tel"
+id="caseContact"
+class="form-control"
+required>
+
+</div>
+<div class="form-group">
+
+<label>Reward Amount (Optional)</label>
+
+<input
+type="number"
+id="caseReward"
+class="form-control"
+placeholder="2000">
+
+</div>
+
+<div class="form-group full-width">
+
+<label>Passport Details</label>
+
+<textarea
+id="caseDescription"
+class="form-control"
+required></textarea>
+
+</div>
+
+<div class="form-group full-width">
+
+<label>Passport Image</label>
+
+<input
+type="file"
+id="imageFileInput"
+accept="image/*"
+hidden>
+
+<div
+class="upload-box"
+onclick="document.getElementById('imageFileInput').click()">
+
+<img id="imagePreview" style="display:none;">
+
+<div
+class="upload-placeholder"
+id="placeholderUI">
+
+<i class="fa-solid fa-passport"></i>
+
+<h3>
+Upload Passport Image
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<button
+type="submit"
+class="submit-btn"
+id="submissionTriggerBtn">
+
+Submit Lost Passport
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
+
+authDomain:
+"safereturn-f6632.firebaseapp.com",
+
+projectId:
+"safereturn-f6632"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const imageFileInput =
+document.getElementById("imageFileInput");
+
+const imagePreview =
+document.getElementById("imagePreview");
+
+const placeholderUI =
+document.getElementById("placeholderUI");
+
+const reportForm =
+document.getElementById("passportForm");
+
+let verifiedImageFile = null;
+
+imageFileInput.addEventListener("change",()=>{
+
+const file =
+imageFileInput.files[0];
+
+if(file){
+
+verifiedImageFile = file;
+
+imagePreview.src =
+URL.createObjectURL(file);
+
+imagePreview.style.display =
+"block";
+
+placeholderUI.style.display =
+"none";
+
+}
+
+});
+
+reportForm.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+if(!verifiedImageFile){
+
+alert("Please upload passport image.");
+
+return;
+
+}
+
+try{
+
+const formData = new FormData();
+
+formData.append(
+"file",
+verifiedImageFile
+);
+
+formData.append(
+"upload_preset",
+"safe_return_upload"
+);
+
+const response = await fetch(
+"https://api.cloudinary.com/v1_1/dtqvfvckj/image/upload",
+{
+method:"POST",
+body:formData
+}
+);
+
+const data = await response.json();
+
+if(!data.secure_url){
+
+throw new Error("Image upload failed.");
+
+}
+
+await addDoc(
+collection(db,"reports"),
+{
+
+name:
+document.getElementById("caseName").value,
+
+location:
+document.getElementById("caseLocation").value,
+
+pincode:
+document.getElementById("casePincode").value,
+
+contact:
+document.getElementById("caseContact").value,
+reward:
+parseInt(
+document.getElementById("caseReward").value
+) || 0,
+description:
+document.getElementById("caseDescription").value,
+
+imageUrl:
+data.secure_url,
+
+type:"lost-passport",
+
+category:"passport",
+
+timestamp:
+new Date().toISOString()
+
+}
+);
+
+alert("Lost passport uploaded!");
+
+reportForm.reset();
+
+imagePreview.style.display =
+"none";
+
+placeholderUI.style.display =
+"block";
+
+verifiedImageFile = null;
+
+}
+
+catch(err){
+
+alert(err.message);
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

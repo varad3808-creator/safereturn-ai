@@ -9,142 +9,977 @@
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>SafeReturn</title>
-
-<link
-rel="stylesheet"
-href="./style.css?v=9999">
+<title>SafeReturn | Home Command</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
 
 <link
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 rel="stylesheet">
 
-<link
-rel="manifest"
-href="./manifest.json">
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+</script>
 
-<meta
-name="theme-color"
-content="#020617">
+<style>
+  .contact-btn{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+padding:14px 24px;
+
+border-radius:16px;
+
+text-decoration:none;
+
+font-weight:700;
+
+color:white;
+
+background:
+
+linear-gradient(
+135deg,
+#0ea5e9,
+#2563eb);
+
+transition:.35s;
+
+box-shadow:
+
+0 12px 25px rgba(37,99,235,.35);
+
+}
+
+.contact-btn:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 20px 35px rgba(37,99,235,.45);
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(
+circle at top,
+#0b2d73 0%,
+#02102f 45%,
+#010814 100%
+);
+
+min-height:100vh;
+color:white;
+display:flex;
+flex-direction:column;
+overflow-x:hidden;
+
+}
+
+/* NAVBAR */
+
+nav{
+
+width:100%;
+height:105px;
+
+background:#020b23;
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:0 70px;
+
+position:sticky;
+top:0;
+z-index:1000;
+
+backdrop-filter:blur(15px);
+
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+text-decoration:none;
+color:white;
+
+}
+
+.logo i{
+
+color:#ef4444;
+font-size:42px;
+
+}
+
+.logo h1{
+
+font-size:48px;
+font-weight:900;
+
+}
+
+.logo span{
+
+color:#ef4444;
+
+}
+
+
+.nav-auth-right{
+
+display:flex;
+align-items:center;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+/* BUTTONS */
+
+.btn{
+
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+gap:10px;
+
+padding:14px 28px;
+
+font-size:16px;
+font-weight:700;
+
+border-radius:14px;
+
+text-decoration:none;
+
+transition:all .25s ease;
+
+cursor:pointer;
+
+border:none;
+
+}
+
+.btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+.btn-nav{
+
+padding:12px 22px;
+font-size:15px;
+border-radius:12px;
+
+}
+
+.btn-danger{
+background:#dc2626;
+color:white;
+}
+
+.btn-success{
+background:#16a34a;
+color:white;
+}
+
+.btn-primary{
+background:#2563eb;
+color:white;
+}
+
+.btn-white{
+background:white;
+color:#020617;
+}
+
+.btn-admin{
+
+background:
+linear-gradient(
+135deg,
+#dc2626,
+#7c3aed
+);
+
+color:white;
+
+}
+
+/* HERO */
+
+.hero{
+
+max-width:1450px;
+
+margin:60px auto;
+
+padding:0 25px;
+
+text-align:center;
+
+}
+
+.hero h2{
+
+font-size:72px;
+font-weight:900;
+
+line-height:1.1;
+
+margin-bottom:25px;
+
+}
+
+.hero h2 span{
+
+background:
+linear-gradient(
+135deg,
+#ef4444,
+#a855f7
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+color:#cbd5e1;
+
+max-width:950px;
+
+margin:auto;
+
+line-height:1.8;
+
+}
+
+/* PREMIUM STATS */
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+margin-top:55px;
+
+}
+
+.stat-card{
+
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+padding:30px;
+
+border-radius:28px;
+
+backdrop-filter:blur(20px);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.3);
+
+}
+
+.stat-card h4{
+
+font-size:18px;
+
+color:#94a3b8;
+
+margin-bottom:15px;
+
+}
+
+.stat-card h1{
+
+font-size:48px;
+
+font-weight:900;
+
+}
+
+/* BUTTONS AREA */
+
+.hero-buttons{
+display:flex;
+flex-direction:column;
+gap:40px;
+margin-top:70px;
+align-items:center;
+width:100%;
+}
+
+.button-row{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:30px;
+width:100%;
+max-width:1300px;
+}
+
+.hero-btn{
+
+height:95px;
+
+border-radius:28px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-decoration:none;
+
+font-size:22px;
+font-weight:800;
+
+color:white;
+
+transition:.3s ease;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.35);
+
+}
+
+.hero-btn:hover{
+
+transform:
+translateY(-6px)
+scale(1.02);
+
+}
+
+.red{
+background:linear-gradient(135deg,#dc2626,#ef4444);
+}
+
+.green{
+background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+
+.orange{
+background:linear-gradient(135deg,#ea580c,#fb923c);
+}
+
+.cyan{
+background:linear-gradient(135deg,#0891b2,#22d3ee);
+}
+
+.purple{
+background:linear-gradient(135deg,#7c3aed,#8b5cf6);
+}
+
+.violet{
+background:linear-gradient(135deg,#6d28d9,#a855f7);
+}
+
+.blue{
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+}
+
+.white{
+background:white;
+color:#020617;
+}
+
+.big-btn{
+height:115px;
+font-size:34px;
+grid-column:span 2;
+}
+
+.donate-btn{
+width:500px;
+max-width:90%;
+margin:0 auto;
+}
+
+/* REPORT SECTION */
+
+.section{
+
+max-width:1400px;
+
+margin:60px auto;
+
+padding:0 20px;
+
+width:100%;
+
+}
+
+.section-title{
+
+font-size:42px;
+font-weight:900;
+
+margin-bottom:30px;
+
+}
+
+/* SEARCH */
+
+.search-container{
+
+display:flex;
+gap:20px;
+
+margin-bottom:40px;
+
+}
+
+.input-wrapper{
+
+flex:2;
+
+position:relative;
+
+}
+
+.input-wrapper i{
+
+position:absolute;
+
+left:20px;
+top:22px;
+
+color:#94a3b8;
+
+font-size:18px;
+
+}
+
+.input-wrapper input,
+.select-wrapper select{
+
+width:100%;
+height:65px;
+
+background:#07152f;
+
+border:
+1px solid rgba(255,255,255,0.1);
+
+border-radius:18px;
+
+color:white;
+
+font-size:17px;
+
+outline:none;
+
+padding-left:55px;
+padding-right:20px;
+
+}
+
+.select-wrapper{
+
+flex:1;
+
+}
+
+.select-wrapper select{
+
+padding-left:20px;
+
+cursor:pointer;
+
+}
+
+/* REPORT GRID */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,minmax(350px,1fr));
+
+gap:30px;
+
+}
+
+.report-card{
+
+background:
+rgba(7,21,47,0.55);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+border-radius:30px;
+
+padding:25px;
+
+box-shadow:
+0 20px 40px rgba(0,0,0,0.4);
+
+display:flex;
+flex-direction:column;
+
+transition:0.25s ease;
+
+}
+
+.report-card:hover{
+
+transform:
+translateY(-6px);
+
+}
+
+.card-img-box{
+
+width:100%;
+height:260px;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin-bottom:20px;
+
+background:#020b23;
+
+cursor:pointer;
+
+}
+
+.card-img-box img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+transition:0.3s;
+
+}
+
+.card-img-box img:hover{
+
+transform:scale(1.05);
+
+}
+
+.card-badge{
+
+padding:8px 15px;
+
+border-radius:12px;
+
+font-size:12px;
+
+font-weight:800;
+
+text-transform:uppercase;
+
+display:inline-block;
+
+margin-bottom:15px;
+
+letter-spacing:0.5px;
+
+align-self:flex-start;
+
+}
+
+.badge-missing{
+
+background:#dc2626;
+color:white;
+
+}
+
+.badge-found{
+
+background:#16a34a;
+color:white;
+
+}
+
+.card-name{
+
+font-size:26px;
+font-weight:800;
+
+margin-bottom:14px;
+
+}
+
+.card-details{
+
+font-size:16px;
+
+color:#cbd5e1;
+
+line-height:1.8;
+
+flex-grow:1;
+
+}
+
+.card-desc{
+
+font-style:italic;
+
+color:#94a3b8;
+
+border-top:
+1px solid rgba(255,255,255,0.08);
+
+padding-top:14px;
+
+margin-top:14px;
+
+display:block;
+
+}
+
+/* ACTIONS */
+
+.card-actions{
+
+display:flex;
+gap:12px;
+
+margin-top:22px;
+
+}
+
+.card-actions .btn{
+
+flex:1;
+
+font-size:14px;
+
+padding:12px;
+
+border-radius:12px;
+
+}
+
+/* IMAGE MODAL */
+
+.modal{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.92);
+
+display:none;
+
+align-items:center;
+justify-content:center;
+
+z-index:99999;
+
+}
+
+.modal img{
+
+max-width:90%;
+max-height:90%;
+
+border-radius:20px;
+
+}
+
+/* FOOTER */
+
+footer{
+
+width:100%;
+
+text-align:center;
+
+padding:40px 20px;
+
+color:#64748b;
+
+font-size:15px;
+
+border-top:
+1px solid rgba(255,255,255,0.08);
+
+background:#020b23;
+
+margin-top:auto;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+nav{
+
+padding:20px;
+
+flex-direction:column;
+
+height:auto;
+
+gap:15px;
+
+}
+
+.logo h1{
+
+font-size:34px;
+
+}
+
+.hero h2{
+
+font-size:44px;
+
+}
+
+.search-container{
+
+flex-direction:column;
+
+}
+
+.grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero-btn{
+
+width:100%;
+max-width:430px;
+
+}
+
+.big-btn{
+
+width:100%;
+max-width:430px;
+
+}
+
+.donate-btn{
+
+width:100%;
+max-width:430px;
+
+}
+
+}
+/* =========================================
+PREMIUM NAV BUTTONS
+========================================= */
+
+.nav-btn{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+padding:14px 28px;
+
+margin:8px;
+
+border-radius:16px;
+
+text-decoration:none;
+
+font-size:16px;
+
+font-weight:700;
+
+color:white;
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6);
+
+box-shadow:
+
+0 12px 30px rgba(37,99,235,.35);
+
+transition:.35s;
+
+}
+
+.nav-btn:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+
+0 20px 40px rgba(37,99,235,.45);
+
+background:
+
+linear-gradient(
+135deg,
+#3b82f6,
+#60a5fa);
+
+}
+
+.nav-btn i{
+
+font-size:18px;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.nav-btn{
+
+width:100%;
+
+margin-top:12px;
+
+justify-content:center;
+
+}
+
+}
+
+</style>
 
 </head>
 
-<link rel="manifest" href="./manifest.json">
-
-<meta name="theme-color" content="#020617">
-
-<link
-rel="apple-touch-icon"
-href="./icons/icon-192.png">
-
 <body>
-
-<!-- LOADER -->
-
-<div
-class="loading-screen"
-id="loader">
-
-<div class="loading-spinner"></div>
-
-<div class="loading-text">
-
-Loading SafeReturn...
-
-</div>
-
-</div>
-
-<!-- LIVE ALERT -->
-
-<div
-id="liveAlert"
-class="live-alert"
-style="display:none;">
-
-<h3>
-
-🚨 Emergency Alert
-
-</h3>
-
-<p id="liveAlertText">
-
-Loading...
-
-</p>
-
-</div>
-
-<!-- GLOWS -->
-
-<div class="glow1"></div>
-<div class="glow2"></div>
-<div class="glow3"></div>
 
 <!-- NAVBAR -->
 
 <nav>
 
-<div class="logo">
+<a href="./index.html" class="logo">
 
 <i class="fa-solid fa-shield-heart"></i>
 
-Safe<span>Return</span>
-
-</div>
-
-<div class="nav-links">
-
-<a
-href="./index.html"
-class="nav-item active-nav">
-
-<i class="fa-solid fa-house"></i>
-
-Home
+<h1>
+Safe <span>Return</span>
+</h1>
 
 </a>
 
-<a
-href="./login.html"
-class="nav-item">
+<div class="nav-auth-right">
 
-<i class="fa-regular fa-user"></i>
+<button
+id="loginBtn"
+class="btn btn-primary btn-nav"
+onclick="window.location.href='./login.html'">
+
+<i class="fa-solid fa-right-to-bracket"></i>
 
 Login
 
-</a>
+</button>
 
-<a
-href="./signup.html"
-class="nav-item">
+<button
+id="signupBtn"
+class="btn btn-white btn-nav"
+onclick="window.location.href='./signup.html'">
 
 <i class="fa-solid fa-user-plus"></i>
 
-Signup
+Sign Up
 
-</a>
+</button>
 
-<a
-href="./profile.html"
-class="nav-item">
+<button
+id="profileBtn"
+class="btn btn-white btn-nav"
+onclick="window.location.href='./profile.html'"
+style="display:none;">
 
-<i class="fa-regular fa-circle-user"></i>
+<i class="fa-solid fa-user"></i>
 
 Profile
 
-</a>
+</button>
+<button id="installBtn" style="display:none;">
+📱 Download App
+</button>
 
-<a
-href="./admin.html"
-class="nav-item">
+<button
+id="adminPanelBtn"
+class="btn btn-admin btn-nav"
+onclick="window.location.href='./admin.html'"
+style="display:none;">
 
-<i class="fa-solid fa-user-shield"></i>
+<i class="fa-solid fa-user-gear"></i>
 
-Admin
+Admin Panel
 
-</a>
+</button>
+
+<button
+id="logoutBtn"
+class="btn btn-danger btn-nav"
+style="display:none;">
+
+<i class="fa-solid fa-power-off"></i>
+
+Logout
+
+</button>
 
 </div>
 
@@ -152,91 +987,120 @@ Admin
 
 <!-- HERO -->
 
-<section class="hero fade-up">
+<section class="hero">
 
-<h1>
+<h2>
 
 Helping Families
 <span>Reconnect Faster</span>
 
-</h1>
+</h2>
 
 <p>
 
-SafeReturn is an AI-powered emergency response platform designed to help reunite missing children, elderly individuals, vulnerable people, and lost pets using realtime alerts, GPS tracking, AI face recognition, CCTV evidence, emergency SOS systems, volunteer coordination, and rescue tools.
+SafeReturn provides a secure emergency network
+for reporting missing individuals, found people,
+lost passports and recovered identity documents.
 
 </p>
+<div class="stats">
 
-<!-- BUTTONS -->
+<div class="stat-card">
+<h4>🚨 Missing Reports</h4>
+<h1 id="missingCount">0</h1>
+</div>
 
-<div
-style="
+<div class="stat-card">
+<h4>✅ Found Reports</h4>
+<h1 id="foundCount">0</h1>
+</div>
+
+<div class="stat-card">
+<h4>🛂 Passport Registry</h4>
+<h1>LIVE</h1>
+</div>
+
+<div class="stat-card">
+<h4>🤖 AI Face Match</h4>
+<h1>ACTIVE</h1>
+</div>
+
+</div>
+
+<div class="hero-buttons">
+
+<div class="button-row">
+
+<a href="./report.html" class="hero-btn red">
+
+🚨 Report Missing Person
+
+</a>
+
+<a href="./found.html" class="hero-btn green">
+
+✅ Report Found Person
+
+</a>
+
+</div>
+
+<div class="button-row">
+
+<a href="./LOST-PASSPORT.HTML" class="hero-btn orange">
+
+🛂 Report Lost Passport
+
+</a>
+
+<a href="./FOUND-PASSPORT.HTML" class="hero-btn cyan">
+
+🪪 Report Found Passport
+
+</a>
+
+</div>
+
+<div class="button-row">
+
+<a href="./passports.html" class="hero-btn purple big-btn">
+
+📂 Passport Registry
+
+</a>
+
+</div>
+
+<div class="button-row">
+
+<a href="./face-match.html" class="hero-btn violet">
+
+🤖 AI Face Match
+
+</a>
+
+<a href="./map.html" class="hero-btn blue">
+
+🗺 Emergency Map
+
+</a>
+
+</div>
+
+<div style="
+width:100%;
 display:flex;
 justify-content:center;
-gap:18px;
-flex-wrap:wrap;
-margin-top:45px;
+margin-top:10px;
 ">
 
-<a
-href="./report.html"
-class="btn btn-danger">
+<a href="./payment.html" class="hero-btn white donate-btn">
 
-<i class="fa-solid fa-triangle-exclamation"></i>
-
-Report Missing
+❤️ Donate
 
 </a>
 
-<a
-href="./found.html"
-class="btn btn-success">
-
-<i class="fa-solid fa-circle-check"></i>
-
-Report Found
-
-</a>
-
-<a
-href="./face-match.html"
-class="btn btn-warning">
-
-<i class="fa-solid fa-user-secret"></i>
-
-AI Face Match
-
-</a>
-
-<a
-href="./map.html"
-class="btn btn-primary">
-
-<i class="fa-solid fa-map-location-dot"></i>
-
-Emergency Map
-
-</a>
-
-<a
-href="./cctv.html"
-class="btn btn-white">
-
-<i class="fa-solid fa-video"></i>
-
-CCTV Portal
-
-</a>
-
-<a
-href="./payment.html"
-class="btn btn-purple">
-
-<i class="fa-solid fa-heart-circle-dollar"></i>
-
-Donate
-
-</a>
+</div>
 
 </div>
 
@@ -244,57 +1108,41 @@ Donate
 
 <!-- REPORTS -->
 
-<section class="section fade-up">
+<section class="section">
 
-<h2 class="section-title">
+<h3 class="section-title">
 
-Live Emergency Reports
+Active Emergency Incident Reports
 
-</h2>
+</h3>
 
-<!-- SEARCH -->
+<div class="search-container">
 
-<div class="premium-search">
-
-<div class="search-box">
+<div class="input-wrapper">
 
 <i class="fa-solid fa-magnifying-glass"></i>
 
 <input
 type="text"
 id="searchInput"
-placeholder="Search by name, location or pincode...">
+placeholder="Search by name or location...">
 
 </div>
 
-<div class="search-box small-search">
-
-<i class="fa-solid fa-filter"></i>
+<div class="select-wrapper">
 
 <select id="categoryFilter">
 
 <option value="all">
-
-All Categories
-
+Show All Incidents
 </option>
 
 <option value="missing">
-
-Missing People
-
+🚨 Missing Persons
 </option>
 
-<option value="elderly">
-
-Missing Elderly
-
-</option>
-
-<option value="pet">
-
-Lost Pets
-
+<option value="found">
+✅ Found Persons
 </option>
 
 </select>
@@ -303,609 +1151,206 @@ Lost Pets
 
 </div>
 
-<!-- REPORT GRID -->
-
-<div
-class="grid"
-id="reportsGrid">
-
-<div class="glass-card">
-
-<h2>
-
-Loading Reports...
-
-</h2>
-
-</div>
-
-</div>
+<div class="grid" id="reportsGrid"></div>
 
 </section>
 
-<!-- WHY THIS WAS MADE -->
+<!-- IMAGE MODAL -->
 
-<section class="story-section fade-up">
+<div class="modal" id="imageModal">
 
-<div class="story-box">
-
-<h2>
-
-Why SafeReturn Was Created
-
-</h2>
-
-<p>
-
-Last year, I got separated from my family in a crowded temple.
-
-For a few terrifying minutes, I had absolutely no idea where they were. The crowd kept moving, people were everywhere, and despite trying to search for them, I felt completely lost and helpless. Even though it may not sound like a long time, in that moment it felt endless.
-
-What scared me most was realizing how quickly someone can disappear in a crowded place — especially children, elderly people, or vulnerable individuals.
-
-After finally reuniting with my family, I couldn’t stop thinking about that experience. I kept wondering how many families go through situations far worse than mine every single day, and how difficult it must be when someone is not found quickly.
-
-Since that day, I secretly started working on an idea that could genuinely help people during emergencies.
-
-That idea slowly became SafeReturn.
-
-SafeReturn was built as an AI-powered emergency response platform designed to help reunite missing people and families faster using realtime alerts, AI face recognition, GPS systems, emergency SOS broadcasts, CCTV evidence uploads, volunteer coordination, and rescue tools.
-
-This project is not just a school project to me.
-
-It is something deeply personal that I have been quietly building ever since that experience, with the hope that technology can help prevent families from experiencing the same fear and panic that I felt that day.
-
-</p>
+<img id="modalImage">
 
 </div>
+<a href="about.html" class="nav-btn">
+    <i class="fa-solid fa-circle-info"></i>
+    About Us
+</a>
+<a href="contact.html" class="contact-btn">
 
-</section>
+<i class="fa-solid fa-envelope"></i>
 
+Contact Us
+
+</a>
 <footer>
 
-© 2026 SafeReturn —
-Built to reconnect families faster.
+© 2026 SafeReturn Command Hub.
+All Rights Reserved.
 
 </footer>
 
-<!-- SOS BUTTON -->
-
-<button
-class="sos-button"
-onclick="openSOS()">
-
-🚨
-
-</button>
-
-<!-- SOS MODAL -->
-
-<div
-id="sosModal"
-class="sos-modal"
-style="display:none;">
-
-<div class="sos-box">
-
-<h1>
-
-🚨 SOS ALERT
-
-</h1>
-
-<p>
-
-Emergency broadcast mode activated.
-
-Nearby volunteers and users should immediately check live alerts and emergency reports.
-
-</p>
-
-<div class="sos-actions">
-
-<button
-class="btn btn-white"
-onclick="shareSOS()">
-
-Share Emergency
-
-</button>
-
-<button
-class="btn btn-warning"
-onclick="triggerSiren()">
-
-Activate Siren
-
-</button>
-
-<button
-class="btn btn-danger"
-onclick="closeSOS()">
-
-Close Alert
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 <script type="module">
 
-import {
-
-db
-
-}
-
-from "./firebase.js?v=9999";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
 import {
 
+getFirestore,
 collection,
 query,
-orderBy,
 onSnapshot
 
 }
 
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-// =========================================
-// ELEMENTS
-// =========================================
+import {
+
+getAuth,
+onAuthStateChanged,
+signOut
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
+
+authDomain:
+"safereturn-f6632.firebaseapp.com",
+
+projectId:
+"safereturn-f6632"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+const auth =
+getAuth(app);
 
 const reportsGrid =
+document.getElementById("reportsGrid");
 
-document.getElementById(
+/* AUTH */
 
-"reportsGrid"
+onAuthStateChanged(auth,(user)=>{
 
+if(user){
+
+document.getElementById("loginBtn")
+.style.display = "none";
+
+document.getElementById("signupBtn")
+.style.display = "none";
+
+document.getElementById("profileBtn")
+.style.display = "inline-flex";
+
+document.getElementById("logoutBtn")
+.style.display = "inline-flex";
+
+if(user.email === "varad3808@gmail.com"){
+
+document.getElementById("adminPanelBtn")
+.style.display = "inline-flex";
+
+localStorage.setItem(
+"jarvisOwner",
+"true"
 );
 
-let unsubscribeReports = null;
-
-// =========================================
-// LOAD REPORTS
-// =========================================
-
-function loadReports(){
-
-if(unsubscribeReports){
-
-unsubscribeReports();
-
 }
+else{
 
-const q = query(
-
-collection(db,"reports"),
-
-orderBy("createdAt","desc")
-
+localStorage.removeItem(
+"jarvisOwner"
 );
 
-unsubscribeReports = onSnapshot(
-
-q,
-
-(snapshot)=>{
-
-reportsGrid.innerHTML = "";
-
-// =========================================
-// FILTER VALUES
-// =========================================
-
-const searchValue =
-
-document.getElementById(
-
-"searchInput"
-
-)
-
-.value
-
-.toLowerCase();
-
-const categoryValue =
-
-document.getElementById(
-
-"categoryFilter"
-
-).value;
-
-// =========================================
-// EMPTY
-// =========================================
-
-if(snapshot.empty){
-
-reportsGrid.innerHTML =
-
-`
-
-<div class="glass-card">
-
-<h2>
-
-No Reports Yet
-
-</h2>
-
-<p>
-
-No active emergency reports available.
-
-</p>
-
-</div>
-
-`;
-
-return;
-
 }
 
-// =========================================
-// LOOP
-// =========================================
-
-snapshot.forEach((docSnap,index)=>{
-
-const data =
-docSnap.data();
-
-// =========================================
-// SEARCH
-// =========================================
-
-const matchesSearch =
-
-data.name
-?.toLowerCase()
-.includes(searchValue)
-
-||
-
-data.location
-?.toLowerCase()
-.includes(searchValue)
-
-||
-
-data.pincode
-?.toString()
-.includes(searchValue);
-
-// =========================================
-// CATEGORY
-// =========================================
-
-const matchesCategory =
-
-categoryValue === "all"
-
-||
-
-data.category === categoryValue;
-
-if(
-
-!matchesSearch ||
-
-!matchesCategory
-
-){
-
-return;
-
 }
-
-// =========================================
-// BADGE
-// =========================================
-
-let badge = "👶";
-
-if(data.category === "elderly"){
-
-badge = "👴";
-
-}
-
-if(data.category === "pet"){
-
-badge = "🐶";
-
-}
-
-// =========================================
-// LIVE ALERT
-// =========================================
-
-setTimeout(()=>{
-
-const liveAlert =
-
-document.getElementById(
-
-"liveAlert"
-
-);
-
-const liveAlertText =
-
-document.getElementById(
-
-"liveAlertText"
-
-);
-
-liveAlertText.innerHTML =
-
-`
-
-<b>${data.name}</b>
-
-reported near
-
-<b>${data.location}</b>
-
-`;
-
-liveAlert.style.display =
-"block";
-
-setTimeout(()=>{
-
-liveAlert.style.display =
-"none";
-
-},5000);
-
-},1500 * (index + 1));
-
-// =========================================
-// CARD
-// =========================================
-
-reportsGrid.innerHTML +=
-
-`
-
-<div class="report-card fade-up">
-
-<img src="${data.image}">
-
-<div class="category-badge">
-
-${badge}
-
-${data.category}
-
-</div>
-
-<h3>
-
-${data.name}
-
-</h3>
-
-<p>
-
-<b>Type:</b>
-${data.type}
-
-<br><br>
-
-<b>Location:</b>
-${data.location}
-
-<br><br>
-
-<b>Pincode:</b>
-${data.pincode || "N/A"}
-
-<br><br>
-
-<b>Emergency Contact:</b>
-${data.contact || "N/A"}
-
-<br><br>
-
-${data.description}
-
-</p>
-
-<br>
-
-<div
-style="
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-">
-
-<a
-href="./details.html?id=${docSnap.id}"
-class="btn btn-primary">
-
-View Details
-
-</a>
-
-<a
-href="./poster.html?id=${docSnap.id}"
-class="btn btn-purple">
-
-Generate Poster
-
-</a>
-
-</div>
-
-</div>
-
-`;
 
 });
 
-}
+/* LOGOUT */
 
+document.getElementById("logoutBtn")
+.addEventListener("click",()=>{
+
+signOut(auth)
+.then(()=>{
+
+localStorage.removeItem(
+"jarvisOwner"
 );
 
-}
+window.location.reload();
 
-loadReports();
+});
 
-// =========================================
-// FILTER EVENTS
-// =========================================
+});
+/* IMAGE MODAL */
 
-document.getElementById(
+window.openImage = (src)=>{
 
-"searchInput"
+document.getElementById("modalImage")
+.src = src;
 
-)
-
-.addEventListener(
-
-"input",
-
-loadReports
-
-);
-
-document.getElementById(
-
-"categoryFilter"
-
-)
-
-.addEventListener(
-
-"change",
-
-loadReports
-
-);
-
-// =========================================
-// LOADER
-// =========================================
-
-window.addEventListener(
-
-"load",
-
-()=>{
-
-setTimeout(()=>{
-
-document.getElementById(
-
-"loader"
-
-)
-
-.classList.add(
-
-"hide"
-
-);
-
-},700);
-
-}
-
-);
-
-// =========================================
-// SERVICE WORKER
-// =========================================
-
-if("serviceWorker" in navigator){
-
-window.addEventListener(
-
-"load",
-
-()=>{
-
-navigator.serviceWorker.register(
-
-"./sw.js?v=9999"
-
-);
-
-}
-
-);
-
-}
-
-// =========================================
-// SOS
-// =========================================
-
-window.openSOS = function(){
-
-document.getElementById(
-
-"sosModal"
-
-)
-
-.style.display =
-"flex";
+document.getElementById("imageModal")
+.style.display = "flex";
 
 };
 
-window.closeSOS = function(){
+document.getElementById("imageModal")
+.onclick = ()=>{
 
-document.getElementById(
-
-"sosModal"
-
-)
-
-.style.display =
-"none";
+document.getElementById("imageModal")
+.style.display = "none";
 
 };
 
-window.shareSOS = function(){
+/* SHARE */
+
+window.shareProfile =
+async(name,location,status)=>{
+
+const text =
+
+`${name} has been reported on SafeReturn near ${location}.`;
 
 if(navigator.share){
 
-navigator.share({
+try{
 
-title:"SafeReturn SOS",
+await navigator.share({
 
-text:"Emergency alert from SafeReturn",
+title:"SafeReturn Alert",
+
+text:text,
 
 url:window.location.href
 
 });
 
 }
+
+catch(err){
+
+console.error(err);
+
+}
+
+}
+
 else{
 
-navigator.clipboard.writeText(
+window.open(
 
-"Emergency alert from SafeReturn"
+`https://wa.me/?text=${encodeURIComponent(text)}`,
 
-);
-
-alert(
-
-"Emergency message copied"
+"_blank"
 
 );
 
@@ -913,22 +1358,343 @@ alert(
 
 };
 
-window.triggerSiren = function(){
+/* PDF */
 
-const audio =
+window.generatePDF =
+(name,loc,contact,desc,type)=>{
 
-new Audio(
+const { jsPDF } = window.jspdf;
 
-"https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
+const doc = new jsPDF();
 
-);
+doc.setFontSize(28);
 
-audio.play();
+doc.text(name,105,40,null,null,"center");
+
+doc.setFontSize(16);
+
+doc.text(`Location: ${loc}`,20,80);
+
+doc.text(`Contact: ${contact}`,20,95);
+
+doc.text(`Type: ${type}`,20,110);
+
+const split =
+doc.splitTextToSize(desc,170);
+
+doc.text(split,20,140);
+
+doc.save(`${name}.pdf`);
 
 };
 
-</script>
+/* LOAD REPORTS */
 
+function syncDatabaseFeed(){
+
+let missingCount = 0;
+let foundCount = 0;
+
+onSnapshot(
+query(collection(db,"reports")),
+(snapshot)=>{
+
+reportsGrid.innerHTML = "";
+
+const searchVal =
+
+document.getElementById("searchInput")
+.value.toLowerCase().trim();
+
+const filterVal =
+
+document.getElementById("categoryFilter")
+.value;
+
+const docsArray = [];
+
+snapshot.forEach((d)=>{
+
+docsArray.push({
+
+id:d.id,
+...d.data()
+
+});
+
+});
+
+docsArray.sort(
+
+(a,b)=>
+
+(b.timestamp
+? new Date(b.timestamp).getTime()
+:0)
+
+-
+
+(a.timestamp
+? new Date(a.timestamp).getTime()
+:0)
+
+);
+
+let cardsRendered = 0;
+
+docsArray.forEach((data)=>{
+
+const type =
+(data.type || "")
+.toLowerCase();
+
+if(type === "missing") missingCount++;
+if(type === "found") foundCount++;
+/* REMOVE PASSPORTS FROM INDEX */
+
+if(
+type === "lost-passport"
+||
+type === "found-passport"
+)return;
+
+const name =
+data.name || "Unknown";
+
+const loc =
+data.location || "Unknown";
+
+const desc =
+data.description || "";
+
+const contact =
+data.contact || "N/A";
+const reward =
+data.reward || 0;
+
+if(
+
+searchVal
+
+&&
+
+!name.toLowerCase().includes(searchVal)
+
+&&
+
+!loc.toLowerCase().includes(searchVal)
+
+)return;
+
+if(
+filterVal !== "all"
+&&
+type !== filterVal
+)return;
+
+cardsRendered++;
+
+const isMissing =
+type === "missing";
+
+reportsGrid.innerHTML += `
+
+<div class="report-card">
+
+<div
+class="card-img-box"
+onclick="openImage('${data.imageUrl}')">
+
+<img
+src="${data.imageUrl || 'https://via.placeholder.com/500'}">
+
+</div>
+
+<div class="card-badge ${isMissing ? 'badge-missing' : 'badge-found'}">
+
+${isMissing ? '🚨 Missing' : '✅ Found'}
+
+</div>
+
+<h3 class="card-name">
+
+${name}
+
+</h3>
+
+${reward > 0 ? `
+
+<div class="reward-badge">
+
+💰 REWARD ₹${reward.toLocaleString()}
+
+</div>
+
+` : ''}
+
+<div class="card-details">
+
+<b>Location:</b>
+${loc}
+
+<br>
+
+<b>Contact:</b>
+${contact}
+
+<span class="card-desc">
+
+"${desc}"
+
+</span>
+
+</div>
+
+<div class="card-actions">
+
+<div class="card-actions">
+
+<button
+class="btn btn-primary"
+onclick="generatePDF('${name}','${loc}','${contact}','${desc}','${type}')">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+Flyer
+
+</button>
+
+<button
+class="btn btn-success"
+onclick="openDetails('${data.id}')">
+
+<i class="fa-solid fa-circle-info"></i>
+
+View Details
+
+</button>
+
+<button
+class="btn btn-white"
+onclick="shareProfile('${name}','${loc}','${type}')">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+Share
+
+</button>
+
+</div>
+
+<button
+class="btn btn-white"
+onclick="shareProfile('${name}','${loc}','${type}')">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+Share
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+const m = document.getElementById("missingCount");
+const f = document.getElementById("foundCount");
+
+if(m) m.innerText = missingCount;
+if(f) f.innerText = foundCount;
+
+if(cardsRendered === 0){
+
+reportsGrid.innerHTML = `
+
+<div style="grid-column:1/-1;text-align:center;padding:40px;">
+
+<h2>
+No Active Reports Found
+</h2>
+
+</div>
+
+`;
+
+}
+
+});
+
+}
+
+document.getElementById("searchInput")
+.addEventListener("input",syncDatabaseFeed);
+
+document.getElementById("categoryFilter")
+.addEventListener("change",syncDatabaseFeed);
+
+window.addEventListener(
+"DOMContentLoaded",
+syncDatabaseFeed
+);
+
+</script>
+<script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '6a198fab75ece094a69c1a6b' },
+          url: 'https://general-runtime.voiceflow.com',
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
+<script>
+
+let deferredPrompt;
+
+window.addEventListener(
+'beforeinstallprompt',
+(e)=>{
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+document.getElementById(
+'installBtn'
+).style.display = 'inline-block';
+
+}
+);
+
+document.getElementById(
+'installBtn'
+).addEventListener(
+'click',
+async()=>{
+
+if(!deferredPrompt)
+return;
+
+deferredPrompt.prompt();
+
+await deferredPrompt.userChoice;
+
+deferredPrompt = null;
+
+}
+);
+
+
+</script>
 </body>
 
 </html>

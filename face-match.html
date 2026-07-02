@@ -1,263 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Face Match | SafeReturn</title>
+    <title>SafeReturn | AI Face Match</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial;
-        }
-
-        body{
-            background:#020b2d;
-            color:white;
-        }
-
-        .container{
-            width:90%;
-            max-width:1000px;
-            margin:auto;
-            margin-top:40px;
-            background:#08153f;
-            border-radius:25px;
-            padding:40px;
-        }
-
-        h1{
-            text-align:center;
-            font-size:60px;
-            margin-bottom:30px;
-        }
-
-        .upload-box{
-            width:100%;
-            height:420px;
-            border-radius:25px;
-            overflow:hidden;
-            background:#111;
-            margin-bottom:30px;
-        }
-
-        .upload-box img{
-            width:100%;
-            height:100%;
-            object-fit:cover;
-        }
-
-        input{
-            display:none;
-        }
-
-        .upload-btn{
-            width:100%;
-            padding:22px;
-            border:none;
-            border-radius:18px;
-            font-size:28px;
-            cursor:pointer;
-            margin-bottom:20px;
-            background:#2d6cff;
-            color:white;
-            font-weight:bold;
-        }
-
-        .scan-btn{
-            width:100%;
-            padding:24px;
-            border:none;
-            border-radius:18px;
-            font-size:32px;
-            cursor:pointer;
-            background:#2d6cff;
-            color:white;
-            font-weight:bold;
-        }
-
-        #resultBox{
-            margin-top:40px;
-        }
-
         .match-card{
-            background:#09153d;
-            border-radius:25px;
-            overflow:hidden;
-            margin-bottom:40px;
-            border:2px solid #2d6cff;
-        }
 
-        .match-card img{
-            width:100%;
-            height:450px;
-            object-fit:cover;
-        }
+padding:25px;
 
-        .match-info{
-            padding:30px;
-        }
+border-radius:20px;
 
-        .match-info h2{
-            font-size:42px;
-            margin-bottom:20px;
-        }
+margin-top:25px;
 
-        .match-info p{
-            font-size:24px;
-            margin-bottom:15px;
-            line-height:1.5;
-        }
+color:white;
 
-        .match-badge{
-            background:#1b3f9e;
-            display:inline-block;
-            padding:10px 20px;
-            border-radius:30px;
-            margin-bottom:20px;
-            font-size:20px;
-        }
+box-shadow:0 10px 30px rgba(0,0,0,.35);
 
+overflow:hidden;
+
+}
+
+.missing-card{
+
+background:linear-gradient(135deg,#b91c1c,#dc2626);
+
+border-left:10px solid gold;
+
+}
+
+.found-card{
+
+background:linear-gradient(135deg,#15803d,#16a34a);
+
+border-left:10px solid #4ade80;
+
+}
+
+.match-card table{
+
+width:100%;
+
+margin-top:15px;
+
+}
+
+.match-card td{
+
+padding:8px 12px;
+
+border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+.match-card td:first-child{
+
+font-weight:bold;
+
+width:180px;
+
+}
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+        body { background: radial-gradient(circle at top, #0b2d73 0%, #02102f 45%, #010814 100%); min-height: 100vh; color: white; display: flex; flex-direction: column; }
+        
+        nav { width: 100%; height: 105px; background: #020b23; border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: space-between; padding: 0 70px; }
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; }
+        .logo i { color: #ef4444; font-size: 42px; }
+        .logo h1 { font-size: 48px; font-weight: 900; }
+        .logo span { color: #ef4444; }
+        .btn-nav { padding: 12px 22px; font-size: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; text-decoration: none; border: none; background: #2563eb; color: white; }
+
+        .container { max-width: 800px; margin: 50px auto; padding: 30px; background: rgba(7, 21, 47, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .container h2 { font-size: 36px; font-weight: 900; margin-bottom: 15px; }
+        .container p { color: #cbd5e1; margin-bottom: 30px; line-height: 1.6; }
+
+        .upload-area { border: 2px dashed rgba(255,255,255,0.2); border-radius: 16px; padding: 40px; background: rgba(0,0,0,0.2); cursor: pointer; position: relative; transition: 0.3s; }
+        .upload-area:hover { border-color: #7c3aed; background: rgba(124, 58, 237, 0.1); }
+        .upload-area input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+        .upload-area i { font-size: 48px; color: #7c3aed; margin-bottom: 15px; }
+
+        .preview-container { display: none; margin-top: 20px; text-align: center; }
+        .preview-container img { max-width: 300px; border-radius: 12px; border: 2px solid #3b82f6; }
+        
+        .btn-scan { display: inline-block; margin-top: 20px; padding: 15px 40px; font-size: 18px; font-weight: bold; background: linear-gradient(135deg, #7c3aed, #2563eb); color: white; border: none; border-radius: 12px; cursor: pointer; transition: 0.3s; width: 100%; }
+        .btn-scan:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        #statusText { margin-top: 20px; font-size: 16px; font-weight: bold; color: #eab308; }
+
+        /* Match Result Cards */
+        #matchesContainer { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .match-card { background: #16a34a; padding: 20px; border-radius: 16px; color: white; text-align: left; display: flex; align-items: center; gap: 20px; }
+        .match-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid white; }
+        .match-info h3 { font-size: 28px; margin-bottom: 5px; }
+        .no-match { display: none; margin-top: 30px; background: #dc2626; padding: 20px; border-radius: 16px; color: white; font-weight: bold; }
+        
+        @media (max-width: 600px) { nav { padding: 0 20px; } .logo h1 { font-size: 28px; } .match-card { flex-direction: column; text-align: center; } }
     </style>
 </head>
-
 <body>
 
+    <nav>
+        <a href="./index.html" class="logo"><i class="fa-solid fa-shield-heart"></i><h1>Safe <span>Return</span></h1></a>
+        <a href="./index.html" class="btn-nav">Back to Home</a>
+    </nav>
+
     <div class="container">
+        <h2>AI Facial Recognition</h2>
+        <p>Upload a clear photo of an individual you have found. Our AI will scan the database of active missing persons to find all possible facial geometry matches.</p>
 
-        <h1>AI Face Match</h1>
-
-        <div class="upload-box">
-            <img id="previewImage" src="" alt="">
+        <div class="upload-area" id="uploadArea">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <h3>Click or Tap to Upload Photo</h3>
+            <input type="file" id="imageInput" accept="image/*">
         </div>
 
-        <input type="file" id="imageInput" accept="image/*">
+        <div class="preview-container" id="previewContainer">
+            <img id="imagePreview" src="" alt="Preview">
+        </div>
 
-        <button class="upload-btn" onclick="document.getElementById('imageInput').click()">
-            Upload Photo
-        </button>
+        <button class="btn-scan" id="scanBtn" disabled>Scan Database <i class="fa-solid fa-microchip"></i></button>
+        <div id="statusText">Loading AI Models... Please wait.</div>
 
-        <button class="scan-btn" onclick="scanFace()">
-            🔍 Scan Database
-        </button>
-
-        <div id="resultBox"></div>
-
+        <div id="matchesContainer"></div>
+        <div class="no-match" id="noMatch">No positive matches found in the active missing database.</div>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-        const imageInput = document.getElementById("imageInput");
-        const previewImage = document.getElementById("previewImage");
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
+            authDomain: "safereturn-f6632.firebaseapp.com",
+            projectId: "safereturn-f6632"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-        imageInput.addEventListener("change", function(){
+const imageInput = document.getElementById('imageInput');
+const imagePreview = document.getElementById('imagePreview');
+const previewContainer = document.getElementById('previewContainer');
+const scanBtn = document.getElementById('scanBtn');
+const statusText = document.getElementById('statusText');
+const matchesContainer = document.getElementById('matchesContainer');
 
-            const file = this.files[0];
+window.presentationLoadImage = function(src){
 
-            if(file){
+imagePreview.src = src;
 
+previewContainer.style.display = "block";
+
+scanBtn.disabled = false;
+
+matchesContainer.innerHTML = "";
+
+document.getElementById(
+"noMatch"
+).style.display = "none";
+
+statusText.innerText =
+"Presentation image loaded.";
+
+statusText.style.color =
+"#16a34a";
+
+};
+
+statusText.innerText =
+"✅ Buffalo AI Ready.";
+
+statusText.style.color =
+"#16a34a";
+
+imageInput.addEventListener(
+"change",
+handleImageUpload
+);
+
+        // Handle File Upload
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
                 const reader = new FileReader();
-
-                reader.onload = function(e){
-                    previewImage.src = e.target.result;
-                }
-
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    previewContainer.style.display = "block";
+                    scanBtn.disabled = false;
+                    matchesContainer.innerHTML = "";
+                    document.getElementById("noMatch").style.display = "none";
+                    statusText.innerText = "Photo loaded. Click 'Scan Database' to begin.";
+                    statusText.style.color = "#cbd5e1";
+                };
                 reader.readAsDataURL(file);
             }
-        });
+        }
+function cosineSimilarity(a,b){
 
-        async function scanFace() {
+    let dot = 0;
+    let normA = 0;
+    let normB = 0;
 
-            if (!previewImage.src) {
-                alert("Upload image first");
-                return;
-            }
+    for(let i=0;i<a.length;i++){
 
-            const resultBox = document.getElementById("resultBox");
+        dot += a[i]*b[i];
+        normA += a[i]*a[i];
+        normB += b[i]*b[i];
 
-            resultBox.innerHTML = `
-                <div style="font-size:40px;text-align:center;padding:40px;">
-                    🔍 Scanning Database...
-                </div>
-            `;
+    }
+
+    return dot/(Math.sqrt(normA)*Math.sqrt(normB));
+
+}
+
+async function getBuffaloEmbedding(file) {
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    const response = await fetch(
+        "http://127.0.0.1:8000/extract",
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+    return await response.json();
+
+}
+
+        // Run AI Scan
+        scanBtn.addEventListener('click', async () => {
+            scanBtn.disabled = true;
+            statusText.innerText = "🔍 Scanning face and extracting geometry...";
+            statusText.style.color = "#eab308";
+            matchesContainer.innerHTML = "";
 
             try {
+                // 1. Get face descriptor of uploaded image
+                const uploadedFile =
+imageInput.files[0];
 
-                const response = await fetch("http://127.0.0.1:5000/match", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        image: previewImage.src
-                    })
-                });
+const uploadedFace =
+await getBuffaloEmbedding(
+    uploadedFile
+);
 
-                const data = await response.json();
+if (!uploadedFace.success) {
 
-                console.log(data);
+    statusText.innerText =
+    "❌ No clear face detected.";
 
-                resultBox.innerHTML = "";
+    statusText.style.color =
+    "#dc2626";
 
-                if (!data.matches || data.matches.length === 0) {
+    scanBtn.disabled = false;
 
-                    resultBox.innerHTML = `
-                        <div style="color:red;font-size:50px;text-align:center;padding:40px;font-weight:bold;">
-                            No Matches Found
-                        </div>
-                    `;
-
+    return;
+}
+                
+                if (!uploadedFace) {
+                    statusText.innerText = "❌ No clear face detected in the uploaded photo. Please try another.";
+                    statusText.style.color = "#dc2626";
+                    scanBtn.disabled = false;
                     return;
                 }
 
-                data.matches.forEach(match => {
+                statusText.innerText = "📡 Connecting to database to find matches...";
+console.log(
+"Buffalo embedding length:",
+uploadedFace.embedding.length
+);
 
-                    resultBox.innerHTML += `
+console.log(
+"Buffalo embedding length:",
+uploadedFace.embedding.length
+);              // 2. Fetch all missing people from Firebase
+                const q = query(collection(db, "reports"));
+                const querySnapshot = await getDocs(q);
+                let foundMatches = [];
 
-                    <div class="match-card">
+              for (const doc of querySnapshot.docs) {
 
-                        <img src="${match.image}" alt="match">
+    const data = doc.data();
 
-                        <div class="match-info">
+    const type = (data.type || data.category || "missing")
+        .toLowerCase()
+        .trim();
 
-                            <div class="match-badge">
-                                🧒 Missing Person
-                            </div>
+if (
+    !data.flagged &&
+    data.embedding
+) {
 
-                            <h2>${match.name}</h2>
+    const similarity = cosineSimilarity(
+        uploadedFace.embedding,
+        data.embedding
+    );
 
-                            <p><strong>Location:</strong> ${match.location}</p>
+    if (similarity >= 0.55) {
 
-                            <p><strong>Pincode:</strong> ${match.pincode}</p>
+        foundMatches.push({
+            data,
+            similarity
+        });
 
-                            <p><strong>Contact:</strong> ${match.contact}</p>
+    }
 
-                            <p>${match.description}</p>
+}{
 
-                        </div>
+        try {
 
-                    </div>
-                    `;
+            const similarity = cosineSimilarity(
+                uploadedFace.embedding,
+                data.embedding
+            );
+
+            if (similarity >= 0.55) {
+
+                foundMatches.push({
+                    data,
+                    similarity
                 });
+
+            }
+
+        } catch (err) {
+
+            console.warn(
+                "Embedding compare failed:",
+                err
+            );
+
+        }
+
+    }
+              }
+
+                // ===============================
+                // Display Results
+                // ===============================
+
+                if (foundMatches.length > 0) {
+
+                    // Highest confidence first
+                    foundMatches.sort(
+                        (a, b) => b.similarity - a.similarity
+                    );
+
+foundMatches.forEach(match => {
+
+    const person = match.data;
+
+    const confidence = (match.similarity * 100).toFixed(1);
+
+    const isMissing =
+        (person.type || person.category || "missing")
+        .toLowerCase() === "missing";
+
+    matchesContainer.innerHTML += `
+
+<div class="match-card ${isMissing ? "missing-card" : "found-card"}">
+
+    <div style="display:flex;gap:25px;align-items:flex-start;flex-wrap:wrap;">
+
+        <div style="text-align:center;">
+
+            <h3 style="margin-bottom:10px;">
+Photo
+</h3>
+
+            <img
+                src="${person.imageUrl || person.image || ''}"
+                style="width:170px;height:170px;object-fit:cover;border-radius:12px;border:4px solid white;"
+            >
+
+        </div>
+
+        <div style="flex:1;min-width:300px;">
+
+            <h2 style="margin-bottom:15px;">
+
+${isMissing
+    ? "🚨 MISSING PERSON"
+    : "✅ FOUND PERSON"}
+
+            </h2>
+
+            <table style="width:100%;font-size:16px;border-collapse:collapse;">
+
+                <tr>
+                    <td><b>Name</b></td>
+                    <td>${person.name || "Unknown"}</td>
+                </tr>
+
+                <tr>
+                    <td><b>Gender</b></td>
+                    <td>${person.gender || "Unknown"}</td>
+                </tr>
+
+                <tr>
+                    <td><b>Estimated Age</b></td>
+                    <td>${person.age || person.estimatedAge || "Unknown"}</td>
+                </tr>
+
+                <tr>
+                    <td><b>Last Seen</b></td>
+                    <td>${person.location || person.lastSeen || "Unknown"}</td>
+                </tr>
+
+            </table>
+
+            <div style="margin-top:20px;padding:15px;border-radius:10px;background:rgba(0,0,0,.25);">
+
+                <h2 style="color:#FFD700;">
+
+                    🤖 AI Match Confidence :
+                    ${confidence}%
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+`;
+
+});
+
+                    statusText.innerText =
+                        `✅ Scan Complete: Found ${foundMatches.length} possible match(es)!`;
+
+                    statusText.style.color = "#16a34a";
+
+                } else {
+
+                    document.getElementById("noMatch").style.display = "block";
+
+                    statusText.innerText =
+                        "No matching person found.";
+
+                    statusText.style.color = "#cbd5e1";
+
+                }
 
             } catch (error) {
 
-                console.log(error);
+                console.error(error);
 
-                resultBox.innerHTML = `
-                    <div style="color:red;font-size:50px;text-align:center;padding:40px;font-weight:bold;">
-                        AI Scan Failed
-                    </div>
-                `;
+                statusText.innerText =
+                    "❌ An error occurred during scanning.";
+
+                statusText.style.color = "#dc2626";
+
             }
-        }
+
+            scanBtn.disabled = false;
+
+        });
 
     </script>
 
 </body>
-
 </html>

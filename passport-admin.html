@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SafeReturn | Passport Admin</title>
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(
+circle at top,
+#0b2d73 0%,
+#02102f 45%,
+#010814 100%
+);
+
+min-height:100vh;
+
+color:white;
+
+}
+
+/* NAV */
+
+nav{
+
+width:100%;
+height:100px;
+
+background:#020b23;
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:0 50px;
+
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+text-decoration:none;
+
+color:white;
+
+}
+
+.logo i{
+
+font-size:40px;
+
+color:#06b6d4;
+
+}
+
+.logo h1{
+
+font-size:42px;
+font-weight:900;
+
+}
+
+.logo span{
+
+color:#06b6d4;
+
+}
+
+.nav-right{
+
+display:flex;
+
+gap:14px;
+
+}
+
+.nav-btn{
+
+height:54px;
+
+padding:0 22px;
+
+border-radius:16px;
+
+display:flex;
+align-items:center;
+gap:10px;
+
+text-decoration:none;
+
+font-weight:800;
+
+transition:0.3s;
+
+}
+
+.nav-btn:hover{
+
+transform:
+translateY(-3px);
+
+}
+
+.people-btn{
+
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6
+);
+
+color:white;
+
+}
+
+.passport-btn{
+
+background:
+linear-gradient(
+135deg,
+#7c3aed,
+#06b6d4
+);
+
+color:white;
+
+}
+
+.home-btn{
+
+background:#07152f;
+
+color:white;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+padding:40px;
+
+}
+
+/* TITLE */
+
+.page-title{
+
+margin-bottom:30px;
+
+}
+
+.page-title h2{
+
+font-size:48px;
+font-weight:900;
+
+margin-bottom:10px;
+
+}
+
+.page-title p{
+
+font-size:18px;
+
+color:#cbd5e1;
+
+opacity:0.85;
+
+}
+
+/* ANALYTICS */
+
+.analytics{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:24px;
+
+margin-bottom:35px;
+
+}
+
+.analytics-box{
+
+height:220px;
+
+border-radius:30px;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,0.35);
+
+}
+
+.analytics-box i{
+
+font-size:50px;
+
+margin-bottom:18px;
+
+}
+
+.analytics-box h2{
+
+font-size:76px;
+font-weight:900;
+
+margin-bottom:10px;
+
+}
+
+.analytics-box p{
+
+font-size:18px;
+font-weight:800;
+
+letter-spacing:1px;
+
+text-transform:uppercase;
+
+}
+
+.lost-box{
+
+background:
+linear-gradient(
+135deg,
+#ea580c,
+#fb923c
+);
+
+}
+
+.found-box{
+
+background:
+linear-gradient(
+135deg,
+#0891b2,
+#22d3ee
+);
+
+}
+
+/* TABLE */
+
+.table-container{
+
+background:
+rgba(7,21,47,0.55);
+
+border-radius:28px;
+
+padding:20px;
+
+overflow-x:auto;
+
+box-shadow:
+0 20px 45px rgba(0,0,0,0.35);
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+min-width:1000px;
+
+}
+
+th,td{
+
+padding:20px;
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+
+text-align:left;
+
+vertical-align:middle;
+
+}
+
+th{
+
+color:#94a3b8;
+
+font-size:14px;
+
+text-transform:uppercase;
+
+letter-spacing:1px;
+
+}
+
+/* IMAGE */
+
+.admin-img{
+
+width:85px;
+height:85px;
+
+object-fit:cover;
+
+border-radius:16px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+border:
+2px solid rgba(255,255,255,0.08);
+
+}
+
+.admin-img:hover{
+
+transform:scale(1.05);
+
+}
+
+/* BADGES */
+
+.badge{
+
+padding:9px 15px;
+
+border-radius:10px;
+
+font-size:12px;
+
+font-weight:900;
+
+display:inline-block;
+
+letter-spacing:0.5px;
+
+}
+
+.lost{
+
+background:#ea580c;
+
+color:white;
+
+}
+
+.found{
+
+background:#06b6d4;
+
+color:white;
+
+}
+
+/* BUTTONS */
+
+.btn{
+
+padding:11px 15px;
+
+border:none;
+
+border-radius:12px;
+
+font-weight:800;
+
+cursor:pointer;
+
+margin:4px;
+
+transition:0.25s;
+
+}
+
+.btn:hover{
+
+transform:
+translateY(-2px);
+
+}
+
+.flag-btn{
+
+background:#facc15;
+
+color:black;
+
+}
+
+.delete-btn{
+
+background:#dc2626;
+
+color:white;
+
+}
+
+/* EMPTY */
+
+.empty{
+
+text-align:center;
+
+padding:70px 20px;
+
+opacity:0.75;
+
+}
+
+.empty i{
+
+font-size:70px;
+
+margin-bottom:15px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+nav{
+
+padding:20px;
+
+flex-direction:column;
+
+height:auto;
+
+gap:20px;
+
+}
+
+.nav-right{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.logo h1{
+
+font-size:34px;
+
+}
+
+.container{
+
+padding:20px;
+
+}
+
+.page-title h2{
+
+font-size:34px;
+
+}
+
+.analytics{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="./index.html" class="logo">
+
+<i class="fa-solid fa-passport"></i>
+
+<h1>
+Safe <span>Return</span>
+</h1>
+
+</a>
+
+<div class="nav-right">
+
+<a
+href="./admin.html"
+class="nav-btn people-btn">
+
+<i class="fa-solid fa-users"></i>
+
+People
+
+</a>
+
+<a
+href="./passport-admin.html"
+class="nav-btn passport-btn">
+
+<i class="fa-solid fa-passport"></i>
+
+Passports
+
+</a>
+
+<a
+href="./index.html"
+class="nav-btn home-btn">
+
+<i class="fa-solid fa-house"></i>
+
+Back To Home
+
+</a>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="page-title">
+
+<h2>
+🛂 Passport Reports Admin
+</h2>
+
+<p>
+Manage lost and found passport reports securely
+</p>
+
+</div>
+
+<!-- ANALYTICS -->
+
+<div class="analytics">
+
+<div class="analytics-box lost-box">
+
+<i class="fa-solid fa-passport"></i>
+
+<h2 id="lostCount">
+0
+</h2>
+
+<p>
+Lost Passports
+</p>
+
+</div>
+
+<div class="analytics-box found-box">
+
+<i class="fa-solid fa-id-card"></i>
+
+<h2 id="foundCount">
+0
+</h2>
+
+<p>
+Found Passports
+</p>
+
+</div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Image</th>
+<th>Name</th>
+<th>Location</th>
+<th>Status</th>
+<th>Controls</th>
+
+</tr>
+
+</thead>
+
+<tbody id="body"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script
+src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js">
+</script>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+
+getFirestore,
+collection,
+onSnapshot,
+doc,
+deleteDoc,
+updateDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+/* FIREBASE */
+
+const app =
+initializeApp({
+
+apiKey:
+"AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
+
+authDomain:
+"safereturn-f6632.firebaseapp.com",
+
+projectId:
+"safereturn-f6632"
+
+});
+
+const db =
+getFirestore(app);
+
+const body =
+document.getElementById("body");
+
+const lightbox =
+GLightbox({
+selector:'.glightbox'
+});
+
+/* FIRESTORE */
+
+onSnapshot(
+collection(db,"reports"),
+(snapshot)=>{
+
+body.innerHTML = "";
+
+let lostCount = 0;
+let foundCount = 0;
+
+snapshot.forEach((docSnap)=>{
+
+const d =
+docSnap.data();
+
+const id =
+docSnap.id;
+
+const type =
+(d.type || "")
+.toLowerCase()
+.trim();
+
+/* ONLY PASSPORTS */
+
+if(
+type !== "lost-passport"
+&&
+type !== "found-passport"
+){
+return;
+}
+
+if(type === "lost-passport"){
+lostCount++;
+}
+
+if(type === "found-passport"){
+foundCount++;
+}
+
+const img =
+d.imageUrl ||
+"https://via.placeholder.com/150";
+
+body.innerHTML += `
+
+<tr>
+
+<td>
+
+<a
+href="${img}"
+class="glightbox">
+
+<img
+src="${img}"
+class="admin-img">
+
+</a>
+
+</td>
+
+<td>
+
+<b>
+${d.name || "N/A"}
+</b>
+
+</td>
+
+<td>
+
+${d.location || "N/A"}
+
+</td>
+
+<td>
+
+<span class="badge ${type==='lost-passport' ? 'lost':'found'}">
+
+${type==='lost-passport'
+
+? '🛂 LOST PASSPORT'
+
+: '🛂 FOUND PASSPORT'}
+
+</span>
+
+</td>
+
+<td>
+
+<button
+class="btn flag-btn"
+onclick="toggleFlag('${id}', ${!!d.flagged})">
+
+${d.flagged ? 'Unflag':'Flag'}
+
+</button>
+
+<button
+class="btn delete-btn"
+onclick="deleteRow('${id}')">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById(
+"lostCount"
+).innerText = lostCount;
+
+document.getElementById(
+"foundCount"
+).innerText = foundCount;
+
+lightbox.reload();
+
+});
+
+/* ACTIONS */
+
+window.toggleFlag =
+async(id,current)=>{
+
+await updateDoc(
+doc(db,"reports",id),
+{
+flagged:!current
+}
+);
+
+};
+
+window.deleteRow =
+async(id)=>{
+
+if(confirm("Delete passport report permanently?")){
+
+await deleteDoc(
+doc(db,"reports",id)
+);
+
+}
+
+};
+
+</script>
+
+</body>
+
+</html>
+```

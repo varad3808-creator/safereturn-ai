@@ -2739,3 +2739,63 @@ width:100%;
 }
 
 }
+.stats{
+
+display:flex;
+justify-content:center;
+align-items:stretch;
+gap:30px;
+flex-wrap:nowrap;
+
+width:100%;
+margin-top:40px;
+
+}
+
+.stat-card{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+padding:30px;
+border-radius:28px;
+backdrop-filter:blur(20px);
+box-shadow:0 15px 35px rgba(0,0,0,.3);
+text-align:center;
+}
+
+.stat-card h4{
+font-size:18px;
+color:#94a3b8;
+margin-bottom:15px;
+}
+
+.stat-card h1{
+font-size:48px;
+font-weight:900;
+}}
+.reward-badge{
+
+display:inline-block;
+
+margin-bottom:15px;
+
+padding:10px 18px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#fbbf24,
+#f59e0b
+);
+
+color:#000;
+
+font-weight:900;
+
+font-size:14px;
+
+box-shadow:
+0 0 20px rgba(251,191,36,.5);
+
+}

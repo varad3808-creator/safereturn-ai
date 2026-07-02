@@ -3,24 +3,15 @@
 // =========================================
 
 import { initializeApp }
-
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
-import {
-
-getFirestore
-
-}
-
+import { getFirestore }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 import {
-
-getAuth,
-GoogleAuthProvider
-
+    getAuth,
+    GoogleAuthProvider
 }
-
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
 // =========================================
@@ -29,26 +20,19 @@ from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
 const firebaseConfig = {
 
-apiKey:
-"AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
+    apiKey: "AIzaSyBwZZ3Vyb-qSpA5u_w4u9CW7y2kbdiDR94",
 
-authDomain:
-"safereturn-f6632.firebaseapp.com",
+    authDomain: "safereturn-f6632.firebaseapp.com",
 
-projectId:
-"safereturn-f6632",
+    projectId: "safereturn-f6632",
 
-storageBucket:
-"safereturn-f6632.firebasestorage.app",
+    storageBucket: "safereturn-f6632.firebasestorage.app",
 
-messagingSenderId:
-"753626237442",
+    messagingSenderId: "753626237442",
 
-appId:
-"1:753626237442:web:f197134274a596777cf51b",
+    appId: "1:753626237442:web:f197134274a596777cf51b",
 
-measurementId:
-"G-9GDWF67F4R"
+    measurementId: "G-9GDWF67F4R"
 
 };
 
@@ -56,34 +40,20 @@ measurementId:
 // INITIALIZE FIREBASE
 // =========================================
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // =========================================
-// FIRESTORE DATABASE
+// SERVICES
 // =========================================
 
-const db =
-getFirestore(app);
+const db = getFirestore(app);
 
-// =========================================
-// FIREBASE AUTH
-// =========================================
+const auth = getAuth(app);
 
-const auth =
-getAuth(app);
-
-// =========================================
-// GOOGLE PROVIDER
-// =========================================
-
-const provider =
-new GoogleAuthProvider();
+const provider = new GoogleAuthProvider();
 
 provider.setCustomParameters({
-
-prompt:"select_account"
-
+    prompt: "select_account"
 });
 
 // =========================================
@@ -91,10 +61,8 @@ prompt:"select_account"
 // =========================================
 
 export {
-
-app,
-db,
-auth,
-provider
-
+    app,
+    db,
+    auth,
+    provider
 };
