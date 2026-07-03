@@ -23,27 +23,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-print("Loading Buffalo_L model...")
+print("Loading Buffalo_S model...")
 
 model = insightface.app.FaceAnalysis(
-    name="buffalo_l",
+    name="buffalo_s",
     providers=["CPUExecutionProvider"]
 )
 
 model.prepare(
     ctx_id=0,
-    det_size=(640, 640)
+    det_size=(320, 320)
 )
 
-print("Buffalo_L Loaded Successfully")
+print("Buffalo_S Loaded Successfully")
 
 
 @app.get("/")
 def root():
-    return {
-        "status": "running",
-        "model": "Buffalo_L"
-    }
+  return {
+    "status": "running",
+    "model": "Buffalo_S"
+}
 
 
 @app.post("/extract")
